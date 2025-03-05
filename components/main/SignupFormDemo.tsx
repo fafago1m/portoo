@@ -46,7 +46,7 @@ export function SignupFormDemo() {
       >
         <h2 className="font-bold text-3xl text-white text-center mb-4 tracking-wide animate-pulse">Contact Us</h2>
         <p className="text-neutral-400 text-sm text-center mb-6">
-          We'd love to hear from you! Send us a message and we'll get back to you as soon as possible.
+          We&apos;d love to hear from you! Send us a message and we&apos;ll get back to you as soon as possible.
         </p>
 
         {successMessage && <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-green-500 text-center mb-4">{successMessage}</motion.p>}

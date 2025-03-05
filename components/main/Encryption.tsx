@@ -5,28 +5,32 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaCertificate } from "react-icons/fa";
 
-const certificates = [
+// Definisi tipe data untuk CertificateCard
+interface CertificateProps {
+  title: string;
+  date: string;
+  image: string;
+}
+
+const certificates: CertificateProps[] = [
   {
-    id: 1,
     title: "Certified Web Developer",
     date: "12 Januari 2024",
     image: "/certificates/web-dev.jpg",
   },
   {
-    id: 2,
     title: "UI/UX Design Mastery",
     date: "20 Februari 2024",
     image: "/certificates/ui-ux.jpg",
   },
   {
-    id: 3,
     title: "Cyber Security Specialist",
     date: "5 Maret 2024",
     image: "/certificates/cyber-security.jpg",
   },
 ];
 
-const CertificateCard = ({ title, date, image }) => {
+const CertificateCard: React.FC<CertificateProps> = ({ title, date, image }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}
@@ -56,7 +60,7 @@ const CertificateCard = ({ title, date, image }) => {
   );
 };
 
-const CertificateGallery = () => {
+const CertificateGallery: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-full h-full bg-black relative overflow-hidden py-20 px-5">
       {/* Background Animation */}
@@ -72,8 +76,8 @@ const CertificateGallery = () => {
       </motion.h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 z-10">
-        {certificates.map((cert) => (
-          <CertificateCard key={cert.id} title={cert.title} date={cert.date} image={cert.image} />
+        {certificates.map((cert, index) => (
+          <CertificateCard key={index} title={cert.title} date={cert.date} image={cert.image} />
         ))}
       </div>
     </div>
