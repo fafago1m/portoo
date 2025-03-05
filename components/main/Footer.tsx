@@ -7,14 +7,7 @@ import {
   RxLinkedinLogo,
 } from "react-icons/rx";
 import { FaYoutube } from "react-icons/fa";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { cn } from "@/lib/utils";
-import {
-  IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandOnlyfans,
-} from "@tabler/icons-react";
+
 
 
 const Footer = () => {
