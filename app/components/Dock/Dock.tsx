@@ -61,10 +61,8 @@ function DockItem({
   const isHovered = useMotionValue(0);
 
   const mouseDistance = useTransform(mouseX, (val) => {
-    const rect = ref.current?.getBoundingClientRect() ?? {
-      x: 0,
-      width: baseItemSize,
-    };
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return 0;
     return val - rect.x - baseItemSize / 2;
   });
 
@@ -78,10 +76,7 @@ function DockItem({
   return (
     <motion.div
       ref={ref}
-      style={{
-        width: size,
-        height: size,
-      }}
+      style={{ width: size, height: size }}
       onHoverStart={() => isHovered.set(1)}
       onHoverEnd={() => isHovered.set(0)}
       onFocus={() => isHovered.set(1)}
@@ -102,10 +97,10 @@ function DockItem({
 type DockLabelProps = {
   className?: string;
   children: React.ReactNode;
+  isHovered: MotionValue<number>;
 };
 
-function DockLabel({ children, className = "", ...rest }: DockLabelProps) {
-  const { isHovered } = rest as { isHovered: MotionValue<number> };
+function DockLabel({ children, className = "", isHovered }: DockLabelProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -125,7 +120,7 @@ function DockLabel({ children, className = "", ...rest }: DockLabelProps) {
           transition={{ duration: 0.2 }}
           className={`${className} absolute -top-6 left-1/2 w-fit whitespace-pre rounded-md border border-neutral-700 bg-[#060606] px-2 py-0.5 text-xs text-white`}
           role="tooltip"
-          style={{ x: "-50%" }}
+          style={{ transform: "translateX(-50%)" }}
         >
           {children}
         </motion.div>
@@ -140,11 +135,7 @@ type DockIconProps = {
 };
 
 function DockIcon({ children, className = "" }: DockIconProps) {
-  return (
-    <div className={`flex items-center justify-center ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`flex items-center justify-center ${className}`}>{children}</div>;
 }
 
 export default function Dock({
@@ -168,10 +159,7 @@ export default function Dock({
   const height = useSpring(heightRow, spring);
 
   return (
-    <motion.div
-      style={{ height, scrollbarWidth: "none" }}
-      className="mx-2 flex max-w-full items-center"
-    >
+    <motion.div style={{ height }} className="mx-2 flex max-w-full items-center">
       <motion.div
         onMouseMove={({ pageX }) => {
           isHovered.set(1);
@@ -198,7 +186,7 @@ export default function Dock({
             baseItemSize={baseItemSize}
           >
             <DockIcon>{item.icon}</DockIcon>
-            <DockLabel>{item.label}</DockLabel>
+            <DockLabel isHovered={mouseX}>{item.label}</DockLabel>
           </DockItem>
         ))}
       </motion.div>
