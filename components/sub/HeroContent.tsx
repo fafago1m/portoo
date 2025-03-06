@@ -44,7 +44,7 @@ const HeroContent = () => {
           className="flex flex-col gap-4 md:gap-6 mt-4 md:mt-6 text-4xl md:text-5xl font-bold text-white max-w-[600px] w-auto h-auto"
         >
           <span><div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-0">
-        <Lanyard position={[0, 0, 13]} gravity={[0, -30, 0]} />
+        <Lanyard position={[0, 0, 23]} gravity={[0, -30, 0]} />
       </div>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
       Ihza{" "}
