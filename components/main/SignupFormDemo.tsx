@@ -48,8 +48,9 @@ export function SignupFormDemo() {
           Contact Us
         </h2>
         <p className="text-neutral-400 text-sm text-center mb-6">
-          We'd love to hear from you! Send us a message and we'll get back to you as soon as possible.
-        </p>
+  We&apos;d love to hear from you! Send us a message and we&apos;ll get back to you as soon as possible.
+</p>
+
 
         {successMessage && (
           <motion.p
