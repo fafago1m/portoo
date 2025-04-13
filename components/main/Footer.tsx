@@ -20,7 +20,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <div className="font-bold text-lg mb-4">Community</div>
             <a
-              href="https://youtube.com"
+              href="https://youtube.com/fafagaming"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center my-2 hover:text-purple-500 transition-colors"
