@@ -36,7 +36,6 @@ export function SignupFormDemo() {
       }
     } catch (error) {
       setSuccessMessage("Oops! Something went wrong. Please try again.");
-      console.error("Email send error:", error);
     }
   };
 
