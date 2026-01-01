@@ -74,36 +74,36 @@ const CertificateCard: React.FC<CertificateProps> = ({ title, date, file }) => {
     <motion.div
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className="relative group overflow-hidden rounded-xl shadow-lg bg-gradient-to-br from-black via-purple-900 to-black border border-purple-500/50 p-4"
+      className="relative group overflow-hidden rounded-xl shadow-lg bg-neutral-900/50 backdrop-blur-sm border border-[#7042f88b] p-4"
     >
-      <div className="absolute inset-0 opacity-30 group-hover:opacity-50 transition duration-500 bg-[radial-gradient(circle_at_top,_rgba(128,0,128,0.5),_transparent)]"></div>
+      <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition duration-500 bg-gradient-to-b from-purple-900/20 to-transparent"></div>
       
-      <div className="absolute top-4 right-4 text-yellow-400 text-3xl z-20">
+      <div className="absolute top-4 right-4 text-[#b49bff] text-2xl z-20">
         <FaCertificate />
       </div>
 
       {isPDF ? (
-        <div className="w-full flex items-center justify-center bg-neutral-800 rounded-lg overflow-hidden h-48">
+        <div className="w-full flex items-center justify-center bg-black/50 rounded-lg overflow-hidden aspect-video relative">
           <Document file={file}>
             <Page pageNumber={1} width={300} />
           </Document>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-lg h-48 w-full relative">
+        <div className="overflow-hidden rounded-lg w-full aspect-video relative bg-black/50">
              <Image
               src={file}
               alt={title}
               fill
-              className="object-cover group-hover:scale-110 transition duration-500"
+              className="object-contain"
             />
         </div>
       )}
       
       <div className="text-center mt-4 relative z-10">
-        <h3 className="text-white text-lg font-semibold flex items-center justify-center gap-2 min-h-[56px]">
+        <h3 className="text-white text-base md:text-lg font-semibold flex items-center justify-center gap-2 min-h-[50px]">
           {title}
         </h3>
-        <p className="text-gray-300 text-sm mt-2">{date}</p>
+        <p className="text-gray-400 text-xs md:text-sm mt-1">{date}</p>
       </div>
     </motion.div>
   );

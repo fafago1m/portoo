@@ -20,13 +20,13 @@ const SkillText = () => {
         variants={slideInFromLeft(0.5)}
         className='text-[30px] text-white font-medium mt-[10px] text-center mb-[15px]'
         >
-            Making apps with modern technologies
+            Modern Tech Stack
         </motion.div>
         <motion.div
         variants={slideInFromRight(0.5)}
         className='cursive text-[20px] text-gray-200 mb-10 mt-[10px] text-center'
         >
-            Never miss a task, deadline or idea
+            Building with the best tools
         </motion.div>
     </div>
   )

@@ -41,7 +41,7 @@ const HeroContent = () => {
           className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
         >
           <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
-          <h1 className="Welcome-text text-[13px]">Fullstack Developer Portfolio</h1>
+          <h1 className="Welcome-text text-[13px]">Developer Portfolio</h1>
         </motion.div>
 
         <motion.div
@@ -60,7 +60,7 @@ const HeroContent = () => {
           variants={slideInFromLeft(0.8)}
           className="text-sm sm:text-base md:text-lg text-gray-400 my-3 md:my-5 max-w-[600px]"
         >
-          Full Stack Software Engineer specializing in scalable web, mobile, and software solutions. Passionate about building high-performance applications and solving complex problems.
+          I am a Full Stack Developer with experience in Website, Mobile, and Software Development. Check out my projects and skills.
         </motion.p>
         <motion.a
           variants={slideInFromLeft(1)}
