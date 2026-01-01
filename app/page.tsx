@@ -2,8 +2,8 @@ import Encryption from "@/components/main/Encryption";
 import Hero from "@/components/main/Hero";
 import Projects from "@/components/main/Projects";
 import Skills from "@/components/main/Skills";
-import { SignupFormDemo } from "@/components/sub/SignupFormDemo"; // Impor SignupFormDemo
-import Footer from "@/components/sub/Footer"; // Impor Footer
+import { SignupFormDemo } from "@/components/main/SignupFormDemo"; // Impor SignupFormDemo
+import Footer from "@/components/main/Footer"; // Import Footer
 import Image from "next/image";
 
 export default function Home() {

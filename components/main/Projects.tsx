@@ -5,22 +5,22 @@ import { motion } from "framer-motion";
 
 const projects = [
   {
-    title: "Lomba GAME LKS Tingkat Provinsi",
-    description: "Full Stack Rest Full API dengan React JS.",
+    title: "Provincial LKS Game Competition",
+    description: "Full Stack RESTful API with React JS.",
     image: "/lks.jpg",
     link: "https://example.com/floating-elements",
     source: "https://github.com/example/floating-elements",
   },
   {
-    title: "Web Catering",
-    description: "Full Stack Rest Full API dengan Laravel & React JS.",
+    title: "Catering Website",
+    description: "Full Stack RESTful API with Laravel & React JS.",
     image: "/cate1.png",
     link: "https://example.com/interactive-design",
     source: "https://github.com/example/interactive-design",
   },
   {
-    title: "Portofolio Update",
-    description: "Project fullstack dengan Next JS dan TypeScript.",
+    title: "Portfolio Update",
+    description: "Fullstack project with Next.js and TypeScript.",
     image: "/poto.png",
     link: "https://example.com/ai-analytics",
     source: "https://github.com/example/ai-analytics",
@@ -53,22 +53,21 @@ const Projects = () => {
               <motion.div
                 whileHover={{ scale: 1.03, rotate: 1 }}
                 transition={{ duration: 0.3 }}
-                className="relative bg-neutral-900 border border-purple-500 rounded-xl shadow-lg p-4 max-w-sm w-full"
+                className="relative bg-neutral-900 border border-purple-500 rounded-xl shadow-lg p-4 max-w-sm w-full flex flex-col"
               >
-                <div className="overflow-hidden rounded-lg">
+                <div className="overflow-hidden rounded-lg relative w-full h-48">
                   <Image
                     src={project.image}
-                    width={500}
-                    height={300}
+                    fill
                     alt={project.title}
-                    className="rounded-lg object-cover w-full h-48"
+                    className="rounded-lg object-cover"
                   />
                 </div>
                 <h2 className="text-xl font-semibold text-purple-300 mt-4 font-orbitron">
                   {project.title}
                 </h2>
-                <p className="text-sm text-gray-400 mt-2">{project.description}</p>
-                <div className="flex justify-between items-center mt-4">
+                <p className="text-sm text-gray-400 mt-2 flex-grow">{project.description}</p>
+                <div className="flex justify-between items-center mt-6">
                   <a
                     href={project.link}
                     target="_blank"
@@ -92,16 +91,16 @@ const Projects = () => {
         </div>
       </div>
 
-      {/* Tombol di luar section project */}
-      <div className="flex justify-center mt-10 z-50 relative">
+      {/* Button outside project section */}
+      <div className="flex justify-center mt-10 z-50 relative pb-20">
         <motion.a
           whileHover={{ scale: 1.1 }}
-          href="https://github.com/fafago1m" // Ganti dengan GitHub kamu
+          href="https://github.com/fafago1m" // Change to your GitHub
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:shadow-purple-500/50 transition-all font-medium shadow-lg"
         >
-          All Projects in GitHub
+          View All Projects on GitHub
         </motion.a>
       </div>
     </>

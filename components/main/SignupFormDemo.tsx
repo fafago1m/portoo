@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import emailjs from "emailjs-com";
 
 export function SignupFormDemo() {
   const [formData, setFormData] = useState({
@@ -19,37 +20,40 @@ export function SignupFormDemo() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const response = await emailjs.send(
+        "service_da9nc9m",
+        "template_c9ux5zt",
+        formData,
+        "8OFYLll4Jwcyjk0pm"
+      );
 
-    if (response.ok) {
-      setSuccessMessage("Thank you! Your message has been sent.");
-      setFormData({ name: "", email: "", message: "" });
-    } else {
+      if (response.status === 200) {
+        setSuccessMessage("Thank you! Your message has been sent.");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSuccessMessage("Oops! Something went wrong. Please try again.");
+      }
+    } catch (error) {
       setSuccessMessage("Oops! Something went wrong. Please try again.");
     }
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-black px-4 overflow-hidden">
-      {/* Form container harus berada di atas semua elemen */}
+    <div className="relative w-full py-20 flex items-center justify-center px-4 overflow-hidden z-40" id="contact">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.5, type: "spring", bounce: 0.5 }}
-        className="max-w-md w-full mx-auto rounded-lg p-8 bg-neutral-900 border border-neutral-800 absolute z-[9999] shadow-lg pointer-events-auto"
+        className="max-w-md w-full mx-auto rounded-lg p-8 bg-neutral-900 border border-neutral-800 shadow-lg"
       >
         <h2 className="font-bold text-3xl text-white text-center mb-4 tracking-wide">
           Contact Us
         </h2>
         <p className="text-neutral-400 text-sm text-center mb-6">
-  We&apos;d love to hear from you! Send us a message and we&apos;ll get back to you as soon as possible.
-</p>
+          We&apos;d love to hear from you! Send us a message and we&apos;ll get back to you as soon as possible.
+        </p>
 
 
         {successMessage && (
@@ -96,7 +100,7 @@ export function SignupFormDemo() {
           />
 
           <motion.button
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 rounded-lg font-medium shadow-lg hover:shadow-purple-500/50 transition-all"
             type="submit"

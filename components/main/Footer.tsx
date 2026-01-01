@@ -12,9 +12,9 @@ import { FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className="w-full h-full bg-transparent text-gray-200 shadow-lg p-[15px]">
+    <div className="w-full bg-transparent text-gray-200 shadow-lg p-[15px] z-50 relative">
       <div className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center">
-        {/* Bagian Atas Footer */}
+        {/* Footer Top */}
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-8 py-8">
           {/* Community Section */}
           <div className="flex flex-col items-center md:items-start">
@@ -88,7 +88,7 @@ const Footer = () => {
               href="#about"
               className="flex items-center my-2 hover:text-purple-500 transition-colors"
             >
-              <span>Learning about me</span>
+              <span>About Me</span>
             </a>
             <a
               href="mailto:alfacastel3@gmail.com"
@@ -99,7 +99,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bagian Bawah Footer */}
+        {/* Footer Bottom */}
         <div className="text-sm text-center mt-8 border-t border-gray-700 pt-4 w-full">
           &copy; Fafa Dev 2025. All rights reserved
         </div>
