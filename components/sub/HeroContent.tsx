@@ -41,7 +41,7 @@ const HeroContent = () => {
           className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
         >
           <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
-          <h1 className="Welcome-text text-[13px]">Developer Portfolio</h1>
+          <h1 className="Welcome-text text-[13px]">Full Stack Software Engineer</h1>
         </motion.div>
 
         <motion.div
@@ -49,27 +49,38 @@ const HeroContent = () => {
           className="flex flex-col gap-4 md:gap-6 mt-4 md:mt-6 text-4xl md:text-5xl font-bold text-white max-w-[600px] w-auto h-auto"
         >
           <span>
+            Hi, I&apos;m
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-              Ihza{" "}
+              {" "}
+              Ihza Maulana{" "}
             </span>
-            Maulana Alfarisi
           </span>
         </motion.div>
 
         <motion.p
           variants={slideInFromLeft(0.8)}
-          className="text-sm sm:text-base md:text-lg text-gray-400 my-3 md:my-5 max-w-[600px]"
+          className="text-sm sm:text-base md:text-lg text-gray-400 my-3 md:my-5 max-w-[600px] leading-relaxed"
         >
-          I am a Full Stack Developer with experience in Website, Mobile, and Software Development. Check out my projects and skills.
+          I architect and build scalable web applications. With a focus on performance and user experience, I transform complex problems into elegant digital solutions using modern technologies.
         </motion.p>
-        <motion.a
+        <motion.div
           variants={slideInFromLeft(1)}
-          href="/cv.pdf"
-          download
-          className="relative py-2 button-primary text-center text-white cursor-pointer rounded-lg max-w-[200px] text-sm md:text-base z-30"
+          className="flex gap-4"
         >
-          Download CV
-        </motion.a>
+            <a
+            href="#projects"
+            className="py-2 px-6 button-primary text-center text-white cursor-pointer rounded-lg z-30 font-semibold hover:shadow-purple-500/50 transition-shadow"
+            >
+            See My Work
+            </a>
+            <a
+            href="/cv.pdf"
+            download
+            className="py-2 px-6 border border-[#7042f88b] bg-transparent text-center text-gray-300 cursor-pointer rounded-lg z-30 font-semibold hover:bg-[#7042f835] hover:text-white transition-colors"
+            >
+            Download CV
+            </a>
+        </motion.div>
       </div>
     </motion.div>
   );

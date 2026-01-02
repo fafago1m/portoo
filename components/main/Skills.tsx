@@ -18,49 +18,70 @@ const Skills = () => {
     >
       <SkillText />
 
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
-        {Frontend_skill.map((image, index) => (
-          <SkillDataProvider
-            key={index}
-            src={image.Image}
-            width={image.width}
-            height={image.height}
-            index={index}
-          />
-        ))}
-      </div>
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
-        {Backend_skill.map((image, index) => (
-          <SkillDataProvider
-            key={index}
-            src={image.Image}
-            width={image.width}
-            height={image.height}
-            index={index}
-          />
-        ))}
-      </div>
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
-        {Full_stack.map((image, index) => (
-          <SkillDataProvider
-            key={index}
-            src={image.Image}
-            width={image.width}
-            height={image.height}
-            index={index}
-          />
-        ))}
-      </div>
-      <div className="flex flex-row justify-around flex-wrap mt-4 gap-5 items-center">
-        {Other_skill.map((image, index) => (
-          <SkillDataProvider
-            key={index}
-            src={image.Image}
-            width={image.width}
-            height={image.height}
-            index={index}
-          />
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 w-full max-w-6xl px-4 z-20">
+        {/* Frontend Section */}
+        <div className="bg-neutral-900/40 backdrop-blur-md border border-purple-500/20 rounded-xl p-6 flex flex-col items-center hover:border-purple-500/50 transition-colors duration-300">
+            <h3 className="text-xl font-bold text-gray-200 mb-6 border-b border-purple-500/30 pb-2 w-full text-center tracking-wider">FRONTEND DEVELOPMENT</h3>
+            <div className="flex flex-wrap justify-center gap-6">
+                {Frontend_skill.map((image, index) => (
+                    <SkillDataProvider
+                        key={index}
+                        src={image.Image}
+                        width={image.width}
+                        height={image.height}
+                        index={index}
+                    />
+                ))}
+            </div>
+        </div>
+
+        {/* Backend Section */}
+        <div className="bg-neutral-900/40 backdrop-blur-md border border-purple-500/20 rounded-xl p-6 flex flex-col items-center hover:border-purple-500/50 transition-colors duration-300">
+            <h3 className="text-xl font-bold text-gray-200 mb-6 border-b border-purple-500/30 pb-2 w-full text-center tracking-wider">BACKEND ARCHITECTURE</h3>
+            <div className="flex flex-wrap justify-center gap-6">
+                 {Backend_skill.map((image, index) => (
+                    <SkillDataProvider
+                        key={index}
+                        src={image.Image}
+                        width={image.width}
+                        height={image.height}
+                        index={index}
+                    />
+                ))}
+            </div>
+        </div>
+
+        {/* Full Stack Section */}
+        <div className="bg-neutral-900/40 backdrop-blur-md border border-purple-500/20 rounded-xl p-6 flex flex-col items-center hover:border-purple-500/50 transition-colors duration-300">
+             <h3 className="text-xl font-bold text-gray-200 mb-6 border-b border-purple-500/30 pb-2 w-full text-center tracking-wider">FULL STACK & MOBILE</h3>
+             <div className="flex flex-wrap justify-center gap-6">
+                {Full_stack.map((image, index) => (
+                    <SkillDataProvider
+                        key={index}
+                        src={image.Image}
+                        width={image.width}
+                        height={image.height}
+                        index={index}
+                    />
+                ))}
+            </div>
+        </div>
+
+        {/* Tools Section */}
+        <div className="bg-neutral-900/40 backdrop-blur-md border border-purple-500/20 rounded-xl p-6 flex flex-col items-center hover:border-purple-500/50 transition-colors duration-300">
+            <h3 className="text-xl font-bold text-gray-200 mb-6 border-b border-purple-500/30 pb-2 w-full text-center tracking-wider">DEVOPS & TOOLS</h3>
+            <div className="flex flex-wrap justify-center gap-6">
+                {Other_skill.map((image, index) => (
+                    <SkillDataProvider
+                        key={index}
+                        src={image.Image}
+                        width={image.width}
+                        height={image.height}
+                        index={index}
+                    />
+                ))}
+            </div>
+        </div>
       </div>
 
       <div className="w-full h-full absolute">
