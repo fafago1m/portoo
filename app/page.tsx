@@ -1,4 +1,4 @@
-import Encryption from "@/components/main/Encryption";
+import Certificates from "@/components/main/Certificates";
 import Hero from "@/components/main/Hero";
 import Projects from "@/components/main/Projects";
 import Skills from "@/components/main/Skills";
@@ -14,7 +14,7 @@ export default function Home() {
         
         <Skills />
         
-        <Encryption />
+        <Certificates />
         <Projects />
         <SignupFormDemo />
         <Footer />

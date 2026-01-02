@@ -21,11 +21,15 @@ export function SignupFormDemo() {
     e.preventDefault();
 
     try {
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
+
       const response = await emailjs.send(
-        "service_da9nc9m",
-        "template_c9ux5zt",
+        serviceId,
+        templateId,
         formData,
-        "8OFYLll4Jwcyjk0pm"
+        publicKey
       );
 
       if (response.status === 200) {

@@ -4,9 +4,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaCertificate } from "react-icons/fa";
-import { Document, Page, pdfjs } from "react-pdf";
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 interface CertificateProps {
   title: string;
@@ -41,7 +38,7 @@ const certificates: CertificateProps[] = [
     file: "/certificates/c4.jpg",
   },
   {
-    title: "Certificate Learning Java Script",
+    title: "Certificate Learning JavaScript",
     date: "January 27, 2025",
     file: "/certificates/c8.jpg",
   },
@@ -68,8 +65,6 @@ const certificates: CertificateProps[] = [
 ];
 
 const CertificateCard: React.FC<CertificateProps> = ({ title, date, file }) => {
-  const isPDF = file.endsWith(".pdf");
-
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
@@ -82,22 +77,14 @@ const CertificateCard: React.FC<CertificateProps> = ({ title, date, file }) => {
         <FaCertificate />
       </div>
 
-      {isPDF ? (
-        <div className="w-full flex items-center justify-center bg-black/50 rounded-lg overflow-hidden aspect-video relative">
-          <Document file={file}>
-            <Page pageNumber={1} width={300} />
-          </Document>
-        </div>
-      ) : (
-        <div className="overflow-hidden rounded-lg w-full aspect-video relative bg-black/50">
-             <Image
-              src={file}
-              alt={title}
-              fill
-              className="object-contain"
-            />
-        </div>
-      )}
+      <div className="overflow-hidden rounded-lg w-full aspect-video relative bg-black/50">
+           <Image
+            src={file}
+            alt={title}
+            fill
+            className="object-contain"
+          />
+      </div>
       
       <div className="text-center mt-4 relative z-10">
         <h3 className="text-white text-base md:text-lg font-semibold flex items-center justify-center gap-2 min-h-[50px]">
@@ -109,7 +96,7 @@ const CertificateCard: React.FC<CertificateProps> = ({ title, date, file }) => {
   );
 };
 
-const CertificateGallery: React.FC = () => {
+const Certificates: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen w-full h-full bg-black relative overflow-hidden py-20 px-5" id="certificates">
       {/* Background Animation */}
@@ -134,4 +121,4 @@ const CertificateGallery: React.FC = () => {
   );
 };
 
-export default CertificateGallery;
+export default Certificates;
