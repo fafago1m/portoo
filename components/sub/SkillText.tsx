@@ -7,27 +7,27 @@ import { SparklesIcon } from '@heroicons/react/24/solid'
 const SkillText = () => {
   return (
     <div className='w-full h-auto flex flex-col items-center justify-center'>
-<motion.div
-          variants={slideInFromTop}
-          className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
-        >
-          <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
-          <h1 className="Welcome-text text-[13px]">
-            Skills & Technologies
-          </h1>
-        </motion.div>
-        <motion.div
+      <motion.div
+        variants={slideInFromTop}
+        className="inline-flex items-center px-4 py-2 border border-indigo-500/30 rounded-full bg-indigo-500/10 backdrop-blur-sm mb-8"
+      >
+        <SparklesIcon className="text-indigo-400 mr-2 h-4 w-4" />
+        <span className="text-indigo-200 text-sm font-medium">
+          Skills & Technologies
+        </span>
+      </motion.div>
+      <motion.div
         variants={slideInFromLeft(0.5)}
-        className='text-[30px] text-white font-medium mt-[10px] text-center mb-[15px]'
-        >
-            Modern Tech Stack
-        </motion.div>
-        <motion.div
+        className="text-3xl md:text-4xl font-bold text-foreground mt-4 text-center mb-4"
+      >
+        Modern Tech Stack
+      </motion.div>
+      <motion.div
         variants={slideInFromRight(0.5)}
-        className='cursive text-[20px] text-gray-200 mb-10 mt-[10px] text-center'
-        >
-            Building with the best tools
-        </motion.div>
+        className="text-lg text-muted-foreground mb-10 text-center max-w-[600px]"
+      >
+        Building with the best tools in the industry to deliver robust and scalable solutions.
+      </motion.div>
     </div>
   )
 }

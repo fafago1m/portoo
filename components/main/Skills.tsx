@@ -20,9 +20,9 @@ const Skills = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 w-full max-w-6xl px-4 z-20">
         {/* Frontend Section */}
-        <div className="bg-neutral-900/40 backdrop-blur-md border border-purple-500/20 rounded-xl p-6 flex flex-col items-center hover:border-purple-500/50 transition-colors duration-300">
-            <h3 className="text-xl font-bold text-gray-200 mb-6 border-b border-purple-500/30 pb-2 w-full text-center tracking-wider">FRONTEND DEVELOPMENT</h3>
-            <div className="flex flex-wrap justify-center gap-6">
+        <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 flex flex-col items-center shadow-sm hover:shadow-md transition-all duration-300">
+            <h3 className="text-lg font-semibold text-foreground mb-8 border-b border-border pb-4 w-full text-center tracking-wide">FRONTEND DEVELOPMENT</h3>
+            <div className="flex flex-wrap justify-center gap-8">
                 {Frontend_skill.map((image, index) => (
                     <SkillDataProvider
                         key={index}
@@ -36,9 +36,9 @@ const Skills = () => {
         </div>
 
         {/* Backend Section */}
-        <div className="bg-neutral-900/40 backdrop-blur-md border border-purple-500/20 rounded-xl p-6 flex flex-col items-center hover:border-purple-500/50 transition-colors duration-300">
-            <h3 className="text-xl font-bold text-gray-200 mb-6 border-b border-purple-500/30 pb-2 w-full text-center tracking-wider">BACKEND ARCHITECTURE</h3>
-            <div className="flex flex-wrap justify-center gap-6">
+        <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 flex flex-col items-center shadow-sm hover:shadow-md transition-all duration-300">
+            <h3 className="text-lg font-semibold text-foreground mb-8 border-b border-border pb-4 w-full text-center tracking-wide">BACKEND ARCHITECTURE</h3>
+            <div className="flex flex-wrap justify-center gap-8">
                  {Backend_skill.map((image, index) => (
                     <SkillDataProvider
                         key={index}
@@ -52,9 +52,9 @@ const Skills = () => {
         </div>
 
         {/* Full Stack Section */}
-        <div className="bg-neutral-900/40 backdrop-blur-md border border-purple-500/20 rounded-xl p-6 flex flex-col items-center hover:border-purple-500/50 transition-colors duration-300">
-             <h3 className="text-xl font-bold text-gray-200 mb-6 border-b border-purple-500/30 pb-2 w-full text-center tracking-wider">FULL STACK & MOBILE</h3>
-             <div className="flex flex-wrap justify-center gap-6">
+        <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 flex flex-col items-center shadow-sm hover:shadow-md transition-all duration-300">
+             <h3 className="text-lg font-semibold text-foreground mb-8 border-b border-border pb-4 w-full text-center tracking-wide">FULL STACK & MOBILE</h3>
+             <div className="flex flex-wrap justify-center gap-8">
                 {Full_stack.map((image, index) => (
                     <SkillDataProvider
                         key={index}
@@ -68,9 +68,9 @@ const Skills = () => {
         </div>
 
         {/* Tools Section */}
-        <div className="bg-neutral-900/40 backdrop-blur-md border border-purple-500/20 rounded-xl p-6 flex flex-col items-center hover:border-purple-500/50 transition-colors duration-300">
-            <h3 className="text-xl font-bold text-gray-200 mb-6 border-b border-purple-500/30 pb-2 w-full text-center tracking-wider">DEVOPS & TOOLS</h3>
-            <div className="flex flex-wrap justify-center gap-6">
+        <div className="bg-card/30 backdrop-blur-sm border border-border rounded-xl p-8 flex flex-col items-center shadow-sm hover:shadow-md transition-all duration-300">
+            <h3 className="text-lg font-semibold text-foreground mb-8 border-b border-border pb-4 w-full text-center tracking-wide">DEVOPS & TOOLS</h3>
+            <div className="flex flex-wrap justify-center gap-8">
                 {Other_skill.map((image, index) => (
                     <SkillDataProvider
                         key={index}
@@ -81,20 +81,6 @@ const Skills = () => {
                     />
                 ))}
             </div>
-        </div>
-      </div>
-
-      <div className="w-full h-full absolute">
-        <div className="w-full h-full z-[-10] opacity-30 absolute flex items-center justify-center bg-cover">
-          <video
-            className="w-full h-auto"
-            preload="false"
-            playsInline
-            loop
-            muted
-            autoPlay
-            src="/cards-video.webm"
-          />
         </div>
       </div>
     </section>
