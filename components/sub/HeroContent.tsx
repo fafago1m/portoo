@@ -38,27 +38,28 @@ const HeroContent = () => {
       <div className="relative h-full w-full flex flex-col gap-5 justify-center m-auto text-start z-20 order-2 md:order-1">
         <motion.div
           variants={slideInFromTop}
-          className="inline-flex items-center px-4 py-2 border border-indigo-500/30 rounded-full bg-indigo-500/10 backdrop-blur-sm"
+          className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
         >
-          <SparklesIcon className="text-indigo-400 mr-2 h-4 w-4" />
-          <span className="text-indigo-200 text-sm font-medium">Full Stack Software Engineer</span>
+          <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
+          <h1 className="Welcome-text text-[13px]">Full Stack Software Engineer</h1>
         </motion.div>
 
         <motion.div
           variants={slideInFromLeft(0.5)}
-          className="flex flex-col gap-4 mt-6 text-5xl md:text-6xl font-extrabold tracking-tight text-foreground max-w-[600px]"
+          className="flex flex-col gap-6 mt-6 text-6xl font-bold text-white max-w-[600px] w-auto h-auto"
         >
           <span>
             Hi, I&apos;m
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
-              Ihza Maulana
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
+              {" "}
+              Ihza Maulana{" "}
             </span>
           </span>
         </motion.div>
 
         <motion.p
           variants={slideInFromLeft(0.8)}
-          className="text-lg text-muted-foreground my-5 max-w-[600px] leading-relaxed font-light"
+          className="text-lg text-gray-400 my-5 max-w-[600px]"
         >
           I architect and build scalable web applications. With a focus on performance and user experience, I transform complex problems into elegant digital solutions using modern technologies.
         </motion.p>
@@ -68,14 +69,14 @@ const HeroContent = () => {
         >
             <a
             href="#projects"
-            className="py-3 px-8 bg-primary text-primary-foreground rounded-lg font-semibold shadow-lg hover:shadow-indigo-500/25 transition-all hover:translate-y-[-2px]"
+            className="py-2 px-6 button-primary text-center text-white cursor-pointer rounded-lg z-30 font-semibold hover:shadow-purple-500/50 transition-shadow"
             >
             See My Work
             </a>
             <a
             href="/cv.pdf"
             download
-            className="py-3 px-8 border border-border bg-card/50 text-foreground rounded-lg font-semibold hover:bg-card transition-all"
+            className="py-2 px-6 border border-[#7042f88b] bg-transparent text-center text-gray-300 cursor-pointer rounded-lg z-30 font-semibold hover:bg-[#7042f835] hover:text-white transition-colors"
             >
             Download CV
             </a>

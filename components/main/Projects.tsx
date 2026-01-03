@@ -49,21 +49,24 @@ const Projects = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
             whileHover={{ y: -10 }}
-            className="flex flex-col h-full rounded-xl overflow-hidden shadow-2xl border border-[#2A0E61] bg-[#0c0c1dd2] backdrop-blur-sm hover:border-purple-500/50 transition-all duration-300"
+            className="group relative flex flex-col h-full rounded-2xl overflow-hidden bg-[#0c0c1dd2] backdrop-blur-xl border border-white/10 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(112,66,248,0.5)] transition-all duration-500"
           >
+            {/* Spotlight Gradient on Hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
             <div className="relative w-full h-52 overflow-hidden">
               <Image
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-cover transition-transform duration-500 hover:scale-110"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 backdrop-blur-sm">
                  <a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md hover:bg-purple-600 transition text-white text-sm font-bold border border-white/20"
+                    className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 transition text-white text-sm font-bold shadow-lg hover:shadow-cyan-500/50"
                   >
                     View Project
                   </a>
@@ -71,10 +74,10 @@ const Projects = () => {
             </div>
 
             <div className="p-6 flex flex-col flex-grow relative z-10">
-              <h1 className="text-xl font-bold text-white mb-2">{project.title}</h1>
+              <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-cyan-200 mb-2">{project.title}</h1>
               <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, i) => (
-                      <span key={i} className="text-[10px] uppercase tracking-wider text-purple-300 bg-purple-900/30 px-2 py-1 rounded border border-purple-500/20">
+                      <span key={i} className="text-[10px] uppercase tracking-wider text-cyan-200 bg-cyan-950/50 px-2 py-1 rounded border border-cyan-500/20 shadow-[0_0_10px_-4px_rgba(6,182,212,0.5)]">
                           {tag}
                       </span>
                   ))}
@@ -83,7 +86,7 @@ const Projects = () => {
                 {project.description}
               </p>
 
-              <div className="flex justify-between items-center pt-4 border-t border-gray-700/50 mt-auto">
+              <div className="flex justify-between items-center pt-4 border-t border-white/10 mt-auto">
                  <span className="text-xs text-gray-500">
                     Full Stack
                  </span>
@@ -91,7 +94,7 @@ const Projects = () => {
                     href={project.source}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-cyan-400 text-sm hover:text-cyan-300 flex items-center gap-1 font-medium transition-colors"
+                    className="text-purple-400 text-sm hover:text-purple-300 flex items-center gap-1 font-medium transition-colors group-hover:underline decoration-purple-500/50 underline-offset-4"
                   >
                     Source Code &rarr;
                   </a>

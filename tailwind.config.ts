@@ -10,40 +10,40 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
-        // Professional Palette (Slate + Indigo)
-			background: '#0f172a', // Slate 900
-			foreground: '#f8fafc', // Slate 50
+        // Premium Space Palette (Deep Void + Neon Accents)
+			background: '#030014', // Deep Void Black
+			foreground: '#ffffff', // Pure White
   			card: {
-				DEFAULT: '#1e293b', // Slate 800
-				foreground: '#f8fafc'
+				DEFAULT: 'rgba(10, 10, 30, 0.6)', // Translucent Deep Blue
+				foreground: '#ffffff'
   			},
   			popover: {
-				DEFAULT: '#1e293b',
-				foreground: '#f8fafc'
+				DEFAULT: '#0f172a',
+				foreground: '#ffffff'
   			},
   			primary: {
-				DEFAULT: '#6366f1', // Indigo 500
+				DEFAULT: '#7042f8', // Electric Purple
 				foreground: '#ffffff'
   			},
   			secondary: {
-				DEFAULT: '#334155', // Slate 700
-				foreground: '#f8fafc'
+				DEFAULT: '#00d8ff', // Cyan
+				foreground: '#ffffff'
   			},
   			muted: {
-				DEFAULT: '#334155',
-				foreground: '#94a3b8' // Slate 400
+				DEFAULT: '#1e293b',
+				foreground: '#94a3b8'
   			},
   			accent: {
-				DEFAULT: '#1e293b',
-				foreground: '#f8fafc'
+				DEFAULT: '#2a0e61', // Dark Purple
+				foreground: '#ffffff'
   			},
   			destructive: {
-				DEFAULT: '#ef4444', // Red 500
-				foreground: '#f8fafc'
+				DEFAULT: '#ef4444',
+				foreground: '#ffffff'
   			},
-			border: '#334155', // Slate 700
-			input: '#334155',
-			ring: '#6366f1',
+			border: '#2a0e61', // Dark Purple Border
+			input: '#2a0e61',
+			ring: '#7042f8',
   		}
   	}
   },
