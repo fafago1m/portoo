@@ -7,7 +7,7 @@ import {
   slideInFromRight,
   slideInFromTop,
 } from "@/utils/motion";
-import Lanyard from "../../app/components/Lanyard/Lanyard";
+import Lanyard from "@/app/components/Lanyard/Lanyard";
 import { SparklesIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 
@@ -35,48 +35,47 @@ const HeroContent = () => {
           className="w-full h-auto max-w-[400px] md:max-w-[650px]"
         />
       </motion.div>
-      <div className="relative h-full w-full flex flex-col gap-5 justify-center m-auto text-start z-20 order-2 md:order-1">
+      <div className="relative h-full w-full flex flex-col gap-6 justify-center m-auto text-start z-20 order-2 md:order-1">
         <motion.div
           variants={slideInFromTop}
-          className="Welcome-box py-[8px] px-[7px] border border-[#7042f88b] opacity-[0.9]"
+          className="inline-flex items-center px-4 py-2 rounded-full glass-panel"
         >
-          <SparklesIcon className="text-[#b49bff] mr-[10px] h-5 w-5" />
-          <h1 className="Welcome-text text-[13px]">Full Stack Software Engineer</h1>
+          <SparklesIcon className="text-primary mr-2 h-4 w-4" />
+          <span className="text-gray-300 text-sm font-medium tracking-wide">Available for Freelance</span>
         </motion.div>
 
         <motion.div
           variants={slideInFromLeft(0.5)}
-          className="flex flex-col gap-6 mt-6 text-6xl font-bold text-white max-w-[600px] w-auto h-auto"
+          className="flex flex-col gap-4 mt-4 text-6xl md:text-7xl font-bold text-white max-w-[600px] leading-tight"
         >
           <span>
-            Hi, I&apos;m
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-              {" "}
-              Ihza Maulana{" "}
+            Crafting
+            <span className="block text-gradient-purple">
+              Digital Experiences
             </span>
           </span>
         </motion.div>
 
         <motion.p
           variants={slideInFromLeft(0.8)}
-          className="text-lg text-gray-400 my-5 max-w-[600px]"
+          className="text-lg md:text-xl text-gray-400 my-4 max-w-[600px] font-light leading-relaxed"
         >
-          I architect and build scalable web applications. With a focus on performance and user experience, I transform complex problems into elegant digital solutions using modern technologies.
+          I&apos;m <span className="text-white font-medium">Ihza Maulana</span>, a Full Stack Engineer specializing in building exceptional digital products with modern technologies.
         </motion.p>
         <motion.div
           variants={slideInFromLeft(1)}
-          className="flex gap-4"
+          className="flex gap-6"
         >
             <a
             href="#projects"
-            className="py-2 px-6 button-primary text-center text-white cursor-pointer rounded-lg z-30 font-semibold hover:shadow-purple-500/50 transition-shadow"
+            className="py-3 px-8 rounded-xl bg-white text-black font-semibold hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             >
-            See My Work
+            View Projects
             </a>
             <a
             href="/cv.pdf"
             download
-            className="py-2 px-6 border border-[#7042f88b] bg-transparent text-center text-gray-300 cursor-pointer rounded-lg z-30 font-semibold hover:bg-[#7042f835] hover:text-white transition-colors"
+            className="py-3 px-8 rounded-xl glass-panel text-white font-semibold hover:bg-white/10 transition-colors"
             >
             Download CV
             </a>

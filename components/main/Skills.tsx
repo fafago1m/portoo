@@ -18,12 +18,11 @@ const Skills = () => {
     >
       <SkillText />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 w-full max-w-6xl px-4 z-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10 w-full max-w-6xl px-4 z-20">
         {/* Frontend Section */}
-        <div className="relative group overflow-hidden bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(112,66,248,0.3)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
-            <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 mb-8 border-b border-white/10 pb-4 w-full text-center tracking-wider relative z-10">FRONTEND DEVELOPMENT</h3>
-            <div className="flex flex-wrap justify-center gap-8 relative z-10">
+        <div className="glass-panel rounded-2xl p-8 hover:scale-[1.01] transition-transform duration-300">
+            <h3 className="text-lg font-medium text-gray-200 mb-6 border-b border-white/5 pb-2">Frontend Stack</h3>
+            <div className="flex flex-wrap gap-6">
                 {Frontend_skill.map((image, index) => (
                     <SkillDataProvider
                         key={index}
@@ -37,10 +36,9 @@ const Skills = () => {
         </div>
 
         {/* Backend Section */}
-        <div className="relative group overflow-hidden bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(112,66,248,0.3)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
-            <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 mb-8 border-b border-white/10 pb-4 w-full text-center tracking-wider relative z-10">BACKEND ARCHITECTURE</h3>
-            <div className="flex flex-wrap justify-center gap-8 relative z-10">
+        <div className="glass-panel rounded-2xl p-8 hover:scale-[1.01] transition-transform duration-300">
+            <h3 className="text-lg font-medium text-gray-200 mb-6 border-b border-white/5 pb-2">Backend Stack</h3>
+            <div className="flex flex-wrap gap-6">
                  {Backend_skill.map((image, index) => (
                     <SkillDataProvider
                         key={index}
@@ -54,10 +52,9 @@ const Skills = () => {
         </div>
 
         {/* Full Stack Section */}
-        <div className="relative group overflow-hidden bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(112,66,248,0.3)]">
-             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
-             <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 mb-8 border-b border-white/10 pb-4 w-full text-center tracking-wider relative z-10">FULL STACK & MOBILE</h3>
-             <div className="flex flex-wrap justify-center gap-8 relative z-10">
+        <div className="glass-panel rounded-2xl p-8 hover:scale-[1.01] transition-transform duration-300">
+             <h3 className="text-lg font-medium text-gray-200 mb-6 border-b border-white/5 pb-2">Full Stack & Mobile</h3>
+             <div className="flex flex-wrap gap-6">
                 {Full_stack.map((image, index) => (
                     <SkillDataProvider
                         key={index}
@@ -71,10 +68,9 @@ const Skills = () => {
         </div>
 
         {/* Tools Section */}
-        <div className="relative group overflow-hidden bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(112,66,248,0.3)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
-            <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 mb-8 border-b border-white/10 pb-4 w-full text-center tracking-wider relative z-10">DEVOPS & TOOLS</h3>
-            <div className="flex flex-wrap justify-center gap-8 relative z-10">
+        <div className="glass-panel rounded-2xl p-8 hover:scale-[1.01] transition-transform duration-300">
+            <h3 className="text-lg font-medium text-gray-200 mb-6 border-b border-white/5 pb-2">DevOps & Tools</h3>
+            <div className="flex flex-wrap gap-6">
                 {Other_skill.map((image, index) => (
                     <SkillDataProvider
                         key={index}

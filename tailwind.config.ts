@@ -9,41 +9,25 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+      fontFamily: {
+        sans: ['Outfit', 'sans-serif'],
+      },
   		colors: {
-        // Premium Space Palette (Deep Void + Neon Accents)
-			background: '#030014', // Deep Void Black
-			foreground: '#ffffff', // Pure White
+			background: '#050505', // Almost black
+			foreground: '#e2e8f0', // Slate 200
   			card: {
-				DEFAULT: 'rgba(10, 10, 30, 0.6)', // Translucent Deep Blue
-				foreground: '#ffffff'
-  			},
-  			popover: {
-				DEFAULT: '#0f172a',
+				DEFAULT: 'rgba(20, 20, 25, 0.6)',
 				foreground: '#ffffff'
   			},
   			primary: {
-				DEFAULT: '#7042f8', // Electric Purple
+				DEFAULT: '#818cf8', // Indigo 400
 				foreground: '#ffffff'
   			},
   			secondary: {
-				DEFAULT: '#00d8ff', // Cyan
+				DEFAULT: '#22d3ee', // Cyan 400
 				foreground: '#ffffff'
   			},
-  			muted: {
-				DEFAULT: '#1e293b',
-				foreground: '#94a3b8'
-  			},
-  			accent: {
-				DEFAULT: '#2a0e61', // Dark Purple
-				foreground: '#ffffff'
-  			},
-  			destructive: {
-				DEFAULT: '#ef4444',
-				foreground: '#ffffff'
-  			},
-			border: '#2a0e61', // Dark Purple Border
-			input: '#2a0e61',
-			ring: '#7042f8',
+			border: 'rgba(255, 255, 255, 0.08)',
   		}
   	}
   },

@@ -48,55 +48,52 @@ const Projects = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
-            whileHover={{ y: -10 }}
-            className="group relative flex flex-col h-full rounded-2xl overflow-hidden bg-[#0c0c1dd2] backdrop-blur-xl border border-white/10 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(112,66,248,0.5)] transition-all duration-500"
+            whileHover={{ y: -5 }}
+            className="group glass-panel rounded-2xl overflow-hidden flex flex-col h-full transition-all duration-500"
           >
-            {/* Spotlight Gradient on Hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
             <div className="relative w-full h-52 overflow-hidden">
               <Image
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 backdrop-blur-sm">
-                 <a
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                  <a
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-2 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 transition text-white text-sm font-bold shadow-lg hover:shadow-cyan-500/50"
+                    className="px-6 py-2 rounded-full bg-white text-black font-semibold hover:scale-105 transition-transform duration-300"
                   >
-                    View Project
+                    Open Project
                   </a>
               </div>
             </div>
 
-            <div className="p-6 flex flex-col flex-grow relative z-10">
-              <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-cyan-200 mb-2">{project.title}</h1>
+            <div className="p-6 flex flex-col flex-grow">
+              <h1 className="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">{project.title}</h1>
               <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, i) => (
-                      <span key={i} className="text-[10px] uppercase tracking-wider text-cyan-200 bg-cyan-950/50 px-2 py-1 rounded border border-cyan-500/20 shadow-[0_0_10px_-4px_rgba(6,182,212,0.5)]">
+                      <span key={i} className="text-[10px] font-semibold uppercase tracking-wider text-gray-300 bg-white/5 px-3 py-1 rounded-full border border-white/5">
                           {tag}
                       </span>
                   ))}
               </div>
-              <p className="text-gray-300 text-sm leading-relaxed mb-6 flex-grow">
+              <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow font-light">
                 {project.description}
               </p>
 
-              <div className="flex justify-between items-center pt-4 border-t border-white/10 mt-auto">
-                 <span className="text-xs text-gray-500">
-                    Full Stack
+              <div className="flex justify-between items-center pt-4 border-t border-white/5 mt-auto">
+                 <span className="text-xs text-gray-500 font-medium">
+                    2024
                  </span>
                  <a
                     href={project.source}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-purple-400 text-sm hover:text-purple-300 flex items-center gap-1 font-medium transition-colors group-hover:underline decoration-purple-500/50 underline-offset-4"
+                    className="text-gray-300 text-sm hover:text-white flex items-center gap-2 transition-colors"
                   >
-                    Source Code &rarr;
+                    Code <span className="text-lg">↗</span>
                   </a>
               </div>
             </div>
