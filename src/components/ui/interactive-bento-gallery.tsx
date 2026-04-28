@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, type Variants } from "motion/react";
 import { createPortal } from "react-dom";
 
 type MediaType = "image" | "video";
@@ -45,7 +45,7 @@ const mediaItems: MediaItemType[] = [
         id: 7, type: "image", title: "Python Web Developer", desc: "Optimized Query architecture",
         url: "/certificates/c5.jpg",
     },
-    
+
     {
         id: 9, type: "image", title: "Full Stack Development", desc: "Skilled in full-stack web development, including building responsive frontends with HTML, CSS, and React, as well as developing backend systems and RESTful APIs using Node.js and SQL databases",
         url: "/certificates/c7.jpg",
@@ -54,15 +54,15 @@ const mediaItems: MediaItemType[] = [
         id: 10, type: "image", title: "JavaScript", desc: "Learned and applied JavaScript in web development projects",
         url: "/certificates/c8.jpg",
     },
-    
+
     {
         id: 8, type: "image", title: "HTML", desc: "Learned and applied HTML in web development projects",
         url: "/certificates/c6.jpg",
     },
-    
+
 ];
 
-const itemVariants = {
+const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
         opacity: 1,

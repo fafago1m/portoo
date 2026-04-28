@@ -20,6 +20,15 @@ import {
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 import * as THREE from 'three';
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      meshLineGeometry: any;
+      meshLineMaterial: any;
+    }
+  }
+}
+
 const cardGLB = "/lanyard/card.glb";
 const lanyardPNG = "/lanyard/lanyard.png";
 
@@ -58,7 +67,7 @@ export function Lanyard({
           <ambientLight intensity={Math.PI} />
 
           <Suspense fallback={null}>
-            <Physics gravity={gravity} timeStep={1 / 60} substeps={4}>
+            <Physics gravity={gravity} timeStep={1 / 60}>
               <Band />
             </Physics>
             <Environment blur={0.75}>
