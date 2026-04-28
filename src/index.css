@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Color System — matches config ── */
+:root {
+  --clr-primary: #7C3AED;
+  --clr-primary-dark: #5B21B6;
+  --clr-accent: #CCFF00;
+  --clr-bg: #ffffff;
+  --clr-bg-card: #f8f9fa;
+  --clr-border: rgba(0, 0, 0, 0.08);
+  --clr-text: #0a0a0a;
+  --clr-text-muted: rgba(0, 0, 0, 0.5);
+
+  /* Shadcn-like variables for compatibility */
+  --background: var(--clr-bg);
+  --foreground: var(--clr-text);
+  --muted: var(--clr-bg-card);
+  --muted-foreground: var(--clr-text-muted);
+}
+
+.dark {
+  --clr-primary: #A78BFA;
+  --clr-primary-dark: #7C3AED;
+  --clr-accent: #CCFF00;
+  --clr-bg: #080808;
+  --clr-bg-card: #121212;
+  --clr-border: rgba(255, 255, 255, 0.04);
+  --clr-text: #ffffff;
+  --clr-text-muted: rgba(255, 255, 255, 0.5);
+
+  --background: var(--clr-bg);
+  --foreground: var(--clr-text);
+}
+
+/* Global transitions for non-ViewTransition changes (initial load, etc.) */
+* {
+  transition: background-color 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+    border-color 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+    color 0.4s ease-out;
+}
+
+/* Suppress all transitions when a View Transition is active to avoid conflicts */
+html:active-view-transition *,
+html:active-view-transition ::before,
+html:active-view-transition ::after {
+  transition: none !important;
+}
+
+/* ── View Transitions API Support — Cinematic Reveal ── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* The 'old' state stays static behind */
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+/* The 'new' state reveals with a circular clip-path */
+::view-transition-new(root) {
+  z-index: 9999;
+  animation: reveal 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@keyframes reveal {
+  from {
+    clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
+  }
+
+  to {
+    clip-path: circle(125% at var(--x, 50%) var(--y, 50%));
+  }
+}
+
+/* Support for browsers that don't support View Transitions */
+@supports not (view-transition-name: root) {
+  .theme-transitioning * {
+    transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1) !important;
+  }
+}
+
+html,
+body {
+  overflow-x: hidden;
+  background-color: var(--clr-bg);
+}
+
+body {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes infiniteSlide {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollDown {
+  0% {
+    top: -100%;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes diamond-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-diamond-rotate {
+  animation: diamond-rotate 12s linear infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
