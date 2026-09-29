@@ -44,12 +44,12 @@ export function ThemeToggle() {
     };
 
     return (
-        <div className="fixed top-8 right-8 z-[1001]">
+        <div className="fixed top-6 right-5 z-[1001] md:top-8 md:right-8">
             <motion.button
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.9, rotate: -5 }}
                 onClick={toggleTheme}
-                className="w-14 h-14 rounded-full flex items-center justify-center bg-white/80 dark:bg-black/40 border border-black/5 dark:border-white/5 shadow-2xl backdrop-blur-2xl transition-all duration-700 overflow-hidden group"
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-white/80 dark:bg-black/40 border border-black/5 dark:border-white/5 shadow-2xl backdrop-blur-2xl transition-all duration-700 overflow-hidden group"
                 aria-label="Toggle theme"
             >
                 <AnimatePresence mode="wait" initial={false}>

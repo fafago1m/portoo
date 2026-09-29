@@ -3,6 +3,7 @@ import { FloatingNavbar } from "./components/ui/floating-navbar";
 import { Hero } from "./components/ui/hero";
 import { SocialLinks } from "./components/ui/social-links";
 import { Footer } from "./components/ui/footer-section";
+import { AboutSection } from "./components/ui/about-section";
 import { FeaturesSection } from "./components/ui/features-section";
 import { ServicesSection } from "./components/ui/services-section";
 import { RatingSection } from "./components/ui/rating-section";
@@ -18,6 +19,7 @@ import { FaqSection } from "./components/ui/faq-section";
 import { BrandMarquee } from "./components/ui/brand-marquee";
 import { QuotesSection } from "./components/ui/quotes-section";
 import { TimelineSection } from "./components/ui/timeline-section";
+
 import { ThemeToggle } from "./components/ui/theme-toggle";
 
 export default function App() {
@@ -37,12 +39,13 @@ export default function App() {
         className="relative z-20 bg-background transition-colors duration-500 rounded-t-[2.5rem] md:rounded-t-[4rem] shadow-[0_-30px_60px_-15px_rgba(0,0,0,0.15)]"
         style={{ y: shouldReduceMotion ? 0 : y, marginTop: '-5rem' }}
       >
+        <AboutSection />
         <div className="max-w-6xl mx-auto px-6 py-16 md:py-24 text-center">
           <FeaturesSection />
         </div>
 
         <BrandMarquee />
-        <TechMarquee />
+        <div id="stack" className="scroll-mt-36"><TechMarquee /></div>
 
         <ProcessSection />
         <TimelineSection />

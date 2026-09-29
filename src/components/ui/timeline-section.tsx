@@ -1,184 +1,113 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
-import { Calendar, Briefcase, GraduationCap, Award } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
+import { ArrowUpRight } from 'lucide-react';
+import { TimelineIllustration, type TimelineIconKind } from './timeline-illustration';
 
-const milestones = [
+const linkedInProfile = 'https://www.linkedin.com/in/ihza-maulana-alfarisi-991a0b318/';
+
+interface Milestone {
+    year: string;
+    date: string;
+    title: string;
+    organization: string;
+    description?: string;
+    kind: TimelineIconKind;
+}
+
+// Dates and roles follow the publicly indexed LinkedIn profile.
+// The LKS financing application is part of the competition, not a separate job.
+const milestones: Milestone[] = [
     {
-        year: '2026',
-        title: '2nd Place – LKS Web Technology',
-        company: 'D.I. Yogyakarta Province',
-        desc: 'Developed a fullstack system using Laravel REST API and Vue SPA with complex workflows, RBAC, and audit logging during the competition.',
-        icon: Award,
-        type: 'award',
+        year: '2026', date: '2026', kind: 'award',
+        title: '2nd Place · LKS Web Technologies',
+        organization: 'D.I. Yogyakarta',
+        description: 'Built a financing system with Laravel and Vue.js, including approvals, access controls, and audit logs.',
     },
     {
-        year: '2026',
-        title: '1st Place – Software Engineering Competency Exam (UKK)',
-        company: 'SMK N 1 Sanden',
-        desc: 'Developed a fullstack web application based on industry standards, demonstrating strong programming and database skills.',
-        icon: Award,
-        type: 'award',
+        year: '2026', date: 'Apr 2026', kind: 'award',
+        title: '1st Place · Ujian Kompetensi Keahlian',
+        organization: 'SMK N 1 Sanden',
     },
     {
-        year: '2026',
-        title: 'Fullstack Developer',
-        company: 'National MSME Financing System Project',
-        desc: 'Built a multi-role system with verification, analysis, and approval workflows using Laravel, Vue.js, and MySQL.',
-        icon: Briefcase,
-        type: 'work',
+        year: '2026', date: 'Mar 2026 — Present', kind: 'work',
+        title: 'Programmer', organization: 'Farmagitech',
     },
     {
-    year: '2025',
-    title: 'Programmer',
-    company: 'PT Farma Global Teknologi',
-    desc: 'Developed a hospital E-Document (E-Doc) system using PHP, HTML, CSS (Bootstrap), JavaScript, and Vue.js, focusing on building responsive interfaces and efficient document management features.',
-    icon: Briefcase,
-    type: 'work',
-},
-    {
-        year: '2025',
-        title: 'Founder & Freelance Web Developer',
-        company: 'Advance Code Technology (ACT STORE)',
-        desc: 'Built and managed a digital business focused on web hosting and IT services while handling multiple client projects.',
-        icon: Briefcase,
-        type: 'work',
-    },
-    
-    {
-        year: '2024',
-        title: 'Fullstack Developer',
-        company: 'GPS-Based Attendance System',
-        desc: 'Developed a location-based attendance system with radius validation using Laravel and Geo Location API.',
-        icon: Briefcase,
-        type: 'work',
+        year: '2025', date: 'Nov 2025', kind: 'award',
+        title: 'Penghargaan Kewirausahaan',
+        organization: 'Pemerintah Provinsi Daerah Istimewa Yogyakarta',
     },
     {
-        year: '2023',
-        title: 'Software Engineering Student',
-        company: 'SMK N 1 Sanden',
-        desc: 'Started my journey in software engineering with a focus on web development.',
-        icon: GraduationCap,
-        type: 'edu',
+        year: '2025', date: 'Jun 2025 — Mar 2026', kind: 'work',
+        title: 'Intern', organization: 'Farma Global Teknologi',
+    },
+    {
+        year: '2024', date: 'Sep 2024', kind: 'certificate',
+        title: 'Madani Entrepreneur Academy',
+        organization: 'PT Permodalan Nasional Madani (Persero)',
+    },
+    {
+        year: '2023', date: '2023 — 2026', kind: 'education',
+        title: 'Software Engineering', organization: 'SMK Negeri 1 Sanden',
+    },
+    {
+        year: '2022', date: 'Aug 2022 — Present', kind: 'founder',
+        title: 'Founder', organization: 'Advance Code Teknologi',
+        description: 'Website development, domains, hosting, VPS, and server maintenance.',
     },
 ];
 
-const TimelineContent = ({ milestone, align }: { milestone: any; align: 'left' | 'right' }) => (
-    <div className={`flex flex-col w-full ${align === 'right' ? 'md:items-end md:text-right' : 'items-start text-left'}`}>
-        <div className={`flex items-center gap-3 mb-3 ${align === 'right' ? 'md:flex-row-reverse' : ''}`}>
-            <span className="text-xs font-black text-primary font-mono tracking-tighter bg-primary/5 px-2.5 py-1 rounded-md border border-primary/20 shadow-sm">
-                {milestone.year}
-            </span>
-            <div className="text-foreground/40 p-1.5 rounded-full bg-background border border-foreground/10 shadow-sm hidden md:block">
-                <milestone.icon size={14} />
-            </div>
-        </div>
-
-        <h3 className="text-xl md:text-2xl font-black uppercase tracking-tight mb-1 text-foreground">
-            {milestone.title}
-        </h3>
-        <p className="text-[10px] md:text-xs font-black text-foreground/40 uppercase tracking-widest mb-4">
-            {milestone.company}
-        </p>
-        <p className={`text-sm md:text-base text-foreground/60 max-w-sm font-medium leading-relaxed ${align === 'right' ? 'md:ml-auto' : ''}`}>
-            {milestone.desc}
-        </p>
-    </div>
-);
+const years = [...new Set(milestones.map((milestone) => milestone.year))];
 
 export function TimelineSection() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start center", "end center"]
-    });
-
-    // Make the timeline rope scale dynamically with scroll!
-    const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+    const reduceMotion = useReducedMotion();
 
     return (
-        <section className="py-24 md:py-40 bg-background transition-colors duration-500 relative overflow-hidden">
-            {/* Ambient Background glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-primary/5 rounded-full blur-[200px] pointer-events-none" />
-
-            <div className="max-w-[1440px] mx-auto px-6 md:px-10 relative z-10">
-                 <div className="text-center mb-24">
-                                    <motion.h2
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: false }}
-                                        className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-4 text-foreground"
-                                    >
-                                        TIME<span className="text-primary">LINE</span>
-                                    </motion.h2>
-                                    <motion.p
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: false }}
-                                        transition={{ delay: 0.1 }}
-                                        className="text-foreground/50 "
-                                    >
-                                        Real-world projects built with modern technologies and a focus on performance and user experience
-                                    </motion.p>
-                                </div>
-
-
-                <div ref={containerRef} className="relative w-full max-w-5xl mx-auto pb-20 isolate">
-
-                    {/* ===== DESKTOP TIMELINE ROPE ===== */}
-                    {/* Faded Background Line */}
-                    <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-4 bottom-0 w-[2px] bg-foreground/10 z-0" />
-                    {/* Animated Paint Scroll Line */}
-                    <motion.div
-                        style={{ scaleY, originY: 0 }}
-                        className="hidden md:block absolute left-1/2 -translate-x-1/2 top-4 bottom-0 w-[3px] bg-primary z-10"
-                    />
-
-                    {/* ===== MOBILE TIMELINE ROPE ===== */}
-                    <div className="md:hidden absolute left-[15px] top-4 bottom-0 w-[2px] bg-foreground/10 z-0" />
-                    <motion.div
-                        style={{ scaleY, originY: 0 }}
-                        className="md:hidden absolute left-[15px] top-4 bottom-0 w-[3px] bg-primary z-10"
-                    />
-
-                    <div className="space-y-16 md:space-y-36 relative z-20">
-                        {milestones.map((milestone, idx) => {
-                            const isEven = idx % 2 === 0;
-
-                            return (
-                                <motion.div
-                                    key={idx}
-                                    // Bawa balik animasi yang di-request (jangan dihilangkan / once: false)
-                                    initial={{ opacity: 0, x: isEven ? -40 : 40, y: 20 }}
-                                    whileInView={{ opacity: 1, x: 0, y: 0 }}
-                                    viewport={{ once: false, amount: 0.4 }}
-                                    transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-                                    className="relative flex flex-col md:flex-row items-start md:items-center w-full group"
-                                >
-                                    {/* Desktop Center Hollow Dot - Persis Gambar Tali */}
-                                    <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-background border-[3px] border-primary z-30 transition-transform duration-500 group-hover:scale-[1.6] group-hover:bg-primary shadow-[0_0_15px_rgba(var(--clr-primary),0.3)]" />
-
-                                    {/* Mobile Dot */}
-                                    <div className="md:hidden absolute left-[15px] -translate-x-1/2 top-2 w-4 h-4 rounded-full bg-background border-[3px] border-primary z-30 transition-transform duration-500 group-hover:scale-125" />
-
-                                    {/* Mobile Content (Selalu Kiri) */}
-                                    <div className="md:hidden w-full pl-10">
-                                        <TimelineContent milestone={milestone} align="left" />
-                                    </div>
-
-                                    {/* Desktop Split Content */}
-                                    <div className={`hidden md:flex w-1/2 justify-end pr-16 lg:pr-24`}>
-                                        {isEven ? <TimelineContent milestone={milestone} align="right" /> : <div className="opacity-0" />}
-                                    </div>
-
-                                    <div className={`hidden md:flex w-1/2 justify-start pl-16 lg:pl-24`}>
-                                        {!isEven ? <TimelineContent milestone={milestone} align="left" /> : <div className="opacity-0" />}
-                                    </div>
-
-                                </motion.div>
-                            )
-                        })}
+        <section id="timeline" aria-labelledby="timeline-title" className="scroll-mt-28 bg-background px-6 py-20 text-foreground sm:px-8 md:py-28">
+            <div className="mx-auto max-w-6xl">
+                <div className="mb-12 flex flex-col justify-between gap-6 border-b border-foreground/10 pb-8 sm:flex-row sm:items-end md:mb-16">
+                    <div>
+                        <h2 id="timeline-title" className="text-5xl font-black leading-none tracking-[-0.055em] sm:text-6xl">Time<span className="text-primary">line.</span></h2>
+                        <p className="mt-4 max-w-sm text-sm leading-6 text-foreground/55">Experience, education, and achievements along the way.</p>
                     </div>
+                    <a href={linkedInProfile} target="_blank" rel="noopener noreferrer" className="inline-flex w-fit shrink-0 items-center gap-2 rounded-sm border-b border-primary/30 pb-1 text-xs font-semibold text-primary hover:border-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+                        View LinkedIn <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                    </a>
                 </div>
+
+                <ol>
+                    {years.map((year) => (
+                        <li key={year} className="grid gap-7 md:grid-cols-[140px_1fr] md:gap-10 lg:grid-cols-[180px_1fr]">
+                            <h3 className="flex self-start items-center gap-4 pt-2 text-4xl font-black tabular-nums tracking-[-0.06em] text-primary md:text-5xl">
+                                {year}<span aria-hidden="true" className="h-px flex-1 bg-foreground/10 md:hidden" />
+                            </h3>
+                            <ol className="ml-2 border-l border-primary/20 pl-6 md:ml-0 md:pl-8">
+                                {milestones.filter((milestone) => milestone.year === year).map((milestone) => (
+                                    <motion.li
+                                        key={`${milestone.title}-${milestone.date}`}
+                                        initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true, amount: 0.2 }}
+                                        transition={{ duration: 0.45, ease: 'easeOut' }}
+                                        className="group relative pb-10 last:pb-14 md:pb-12 md:last:pb-16"
+                                    >
+                                        <span aria-hidden="true" className={`absolute -left-[29px] top-6 h-2.5 w-2.5 rounded-full border-2 border-primary md:-left-[37px] ${milestone.kind === 'award' ? 'bg-accent' : 'bg-background'}`} />
+                                        <div className="flex items-start gap-3 sm:gap-5">
+                                            <div className="shrink-0 transition-transform duration-300 motion-safe:group-hover:-rotate-6 motion-safe:group-hover:-translate-y-1">
+                                                <TimelineIllustration kind={milestone.kind} />
+                                            </div>
+                                            <div className="min-w-0 pt-1 sm:pt-2">
+                                                <p className="mb-2 text-[10px] font-semibold tracking-wide text-foreground/45 sm:text-xs">{milestone.date}</p>
+                                                <h4 className="text-lg font-extrabold leading-snug tracking-tight sm:text-2xl">{milestone.title}</h4>
+                                                <p className="mt-1.5 text-xs font-medium leading-5 text-primary sm:text-sm">{milestone.organization}</p>
+                                                {milestone.description && <p className="mt-3 max-w-xl text-sm leading-6 text-foreground/60">{milestone.description}</p>}
+                                            </div>
+                                        </div>
+                                    </motion.li>
+                                ))}
+                            </ol>
+                        </li>
+                    ))}
+                </ol>
             </div>
         </section>
     );

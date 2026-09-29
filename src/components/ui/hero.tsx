@@ -1,228 +1,78 @@
-import { Suspense } from "react";
-import { motion } from "motion/react";
-import { Lanyard } from "./lanyard";
-import { AnimatedLetterText } from "./potfolio-text";
+import { BrandLogo } from "./brand-logo";
+import { motion, useReducedMotion } from "motion/react";
+import { ArrowDown, ArrowUpRight, Sparkles } from "lucide-react";
+import { LaptopIllustration } from "./laptop-illustration";
 
 export function Hero() {
+    const reduceMotion = useReducedMotion();
+
     return (
-        <div className="relative min-h-screen md:h-[120vh] flex flex-col font-sans overflow-hidden w-full bg-primary dark:bg-black">
+        <section id="home" aria-labelledby="hero-title" className="relative isolate overflow-hidden bg-primary text-white dark:bg-black">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-60"
+                style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)", backgroundSize: "72px 72px" }} />
 
-            {/* Background Grid */}
-            <div className="absolute inset-0 pointer-events-none z-0"
-                style={{
-                    backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)`,
-                    backgroundSize: "60px 60px",
-                }} />
-
-            {/* 3D Lanyard Layer - High Z-Index for interaction */}
-            <div className="absolute inset-0 z-[100] pointer-events-none overflow-visible">
-                <Suspense fallback={null}>
-                    <Lanyard />
-                </Suspense>
-            </div>
-
-            {/* Navbar */}
-            <nav className="relative z-30 flex items-center justify-between px-6 py-6 md:px-10 md:py-8 max-w-[1440px] mx-auto w-full">
-                <div className="flex items-center gap-1">
-                    <div className="bg-foreground text-background font-black tracking-tight text-xs md:text-sm px-3 py-1.5 rounded-2xl rounded-bl-sm relative shadow-sm">
-                        IHZA
-                        <div className="absolute -bottom-1.5 left-0 w-3 h-3 bg-foreground"
-                            style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }} />
-                    </div>
-                    <div className="text-primary-dark font-black text-xs md:text-sm px-3 py-1.5 rounded-full border-[1.5px] border-white shadow-sm"
-                        style={{ background: "var(--clr-accent)" }}>DEV</div>
-                </div>
-                <div className="hidden md:flex items-center space-x-2">
-                    {["Work", "About", "Stack", "Blog"].map((item) => (
-                        <a key={item} href={`#${item.toLowerCase()}`}
-                            className="px-4 py-1.5 rounded-full border border-white/30 text-white text-xs font-semibold hover:bg-white/10 transition-colors">
-                            {item}
-                        </a>
+            <nav aria-label="Hero navigation" className="relative z-30 mx-auto mb-8 flex w-full max-w-[1440px] items-center justify-between gap-2 px-4 py-6 pr-20 md:gap-4 md:px-10 md:py-8 md:pr-28">
+                <a href="#home" aria-label="Ihza Dev — Home" className="shrink-0 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                    <BrandLogo onPrimary />
+                </a>
+                <div className="hidden items-center space-x-2 md:flex">
+                    {["Work", "About", "Stack"].map((item) => (
+                        <a key={item} href={`#${item.toLowerCase()}`} className="rounded-full border border-white/30 px-4 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/10">{item}</a>
                     ))}
                 </div>
-                <a href="mailto:alfacastel3@gmail.com"
-                    className="px-6 py-2 rounded-full border border-white text-white text-xs md:text-sm font-semibold transition-colors"
-                    onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.color = "var(--clr-primary)";
-                        (e.currentTarget as HTMLElement).style.background = "#fff";
-                    }}
-                    onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.color = "#fff";
-                        (e.currentTarget as HTMLElement).style.background = "transparent";
-                    }}>
-                    Hire me
-                </a>
+                <a href="mailto:alfacastel3@gmail.com" className="shrink-0 rounded-full border border-white px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-white hover:text-primary-dark md:px-6 md:text-sm">Hire me</a>
             </nav>
 
-            {/* Hero Content */}
-            <main className="flex-1 relative z-10 pt-8 pb-40 md:pt-12 md:pb-64 px-4 flex flex-col items-center justify-center w-full max-w-[1440px] mx-auto">
-                <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center text-center z-20 mt-4 mb-16">
-
-                    {/* Card 1 — Bottom Left (desktop only) */}
-                    <motion.div animate={{ y: [0, -15, 0] }}
-                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                        className="hidden md:block absolute -bottom-16 -left-20 z-10 pointer-events-auto">
-                        <div className="w-52 aspect-[3/3.5] backdrop-blur-md border border-white/40 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[-12deg] shadow-2xl hover:rotate-0 transition-transform duration-500"
-                            style={{ background: "rgba(255,255,255,0.2)" }}>
-                            <div className="w-24 h-24 rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden"
-                                style={{ background: "#D2B48C" }}>
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ihza&backgroundColor=D2B48C" alt="Avatar" className="w-full h-full object-cover" />
-                            </div>
-                            <div className="text-center mt-2">
-                                <p className="font-bold text-lg text-white">ihza.dev</p>
-                                <p className="text-xs text-white/80 mt-1">42+ projects</p>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Card 2 — Top Right (desktop only) */}
-                    <motion.div animate={{ y: [0, -20, 0] }}
-                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                        className="hidden md:block absolute -top-10 -right-20 z-10 pointer-events-auto">
-                        <div className="w-52 aspect-[3/3.5] backdrop-blur-md border border-white/40 rounded-[2rem] p-5 flex flex-col items-center justify-center rotate-[12deg] shadow-2xl hover:rotate-0 transition-transform duration-500"
-                            style={{ background: "rgba(255,255,255,0.2)" }}>
-                            <div className="w-24 h-24 rounded-full flex items-center justify-center mb-4 shadow-inner border-[3px] border-white/50 overflow-hidden"
-                                style={{ background: "#2C3E50" }}>
-                                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Frontend" alt="Avatar" className="w-full h-full object-cover scale-150" />
-                            </div>
-                            <div className="text-center mt-2">
-                                <p className="font-bold text-lg text-white">React Dev</p>
-                                <p className="text-xs text-white/80 mt-1">3+ yrs experience</p>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Card 3 — Mid Left (Layered) */}
-                    <motion.div animate={{ x: [0, 15, 0], y: [0, -25, 0] }}
-                        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                        className="hidden md:block absolute top-[20%] -left-32 z-0 pointer-events-auto">
-                        <div className="w-52 aspect-video backdrop-blur-md border border-white/40 rounded-2xl p-4 flex flex-col items-center justify-center rotate-[-8deg] shadow-xl hover:rotate-0 transition-transform duration-500 bg-white/10">
-                            <p className="text-[10px] font-black uppercase tracking-widest text-white/60 mb-2">Core Stack</p>
-                            <div className="flex gap-2">
-                                {["React", "Next", "TS", "Framer"].map(t => (
-                                    <span key={t} className="px-2 py-1 rounded bg-accent text-[8px] font-black text-primary-dark">{t}</span>
-                                ))}
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Card 4 — Mid Right (Layered) */}
-                    <motion.div animate={{ x: [0, -15, 0], y: [0, 20, 0] }}
-                        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-                        className="hidden md:block absolute bottom-[30%] -right-32 z-0 pointer-events-auto">
-                        <div className="w-48 aspect-square backdrop-blur-md border border-white/40 rounded-3xl p-4 flex flex-col items-center justify-center rotate-[10deg] shadow-xl hover:rotate-0 transition-transform duration-500 bg-white/10">
-                            <p className="text-[10px] font-black uppercase tracking-widest text-white/60 mb-1">Efficiency</p>
-                            <h4 className="text-4xl font-black text-accent leading-none">99%</h4>
-                            <p className="text-[8px] text-white/40 font-bold mt-1 uppercase tracking-widest">Performance Score</p>
-                            <div className="mt-4 w-full h-1 bg-white/10 rounded-full overflow-hidden">
-                                <motion.div initial={{ width: 0 }} animate={{ width: "99%" }} transition={{ duration: 2, delay: 1 }} className="h-full bg-accent" />
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Availability badge */}
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="inline-flex items-center gap-1.5 md:gap-2 rounded-full px-3 py-1 md:px-4 md:py-2 mb-8 md:mb-10 border"
-                        style={{ background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)" }}>
-                        <span className="relative w-1.5 h-1.5 md:w-2 md:h-2">
-                            <span className="absolute inset-0 rounded-full animate-ping opacity-70" style={{ background: "var(--clr-accent)" }} />
-                            <span className="relative block w-1.5 h-1.5 md:w-2 md:h-2 rounded-full" style={{ background: "var(--clr-accent)" }} />
+            <div className="mx-auto grid w-full max-w-7xl items-center gap-4 px-6 pb-12 sm:px-8 lg:min-h-[640px] lg:grid-cols-[1.2fr_1fr] lg:gap-4 lg:px-12 lg:pb-16">
+                <motion.div className="relative z-10 min-w-0 pt-4 lg:pt-0" initial={reduceMotion ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+                    <p className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/[0.06] px-3.5 py-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/80 sm:text-[10px]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_12px_#ccff0055]" /> Available for freelance
+                    </p>
+                    <p className="mb-5 flex items-center gap-3 text-sm font-medium text-white/75">
+                        <span className="h-px w-8 bg-accent" aria-hidden="true" /> Hey, I'm Ihza. A full stack developer.
+                    </p>
+                    <h1 id="hero-title" className="text-[clamp(3.1rem,7.3vw,6.5rem)] font-black leading-[1.02] tracking-[-0.065em]">
+                        Good design.<br />
+                        Great code.<br />
+                        <span className="relative inline-block pb-3 text-accent">
+                            Real impact.
+                            <svg aria-hidden="true" viewBox="0 0 440 20" preserveAspectRatio="none" className="absolute bottom-0 left-0 h-3 w-full text-accent/70" fill="none">
+                                <path d="M3 14C110 1 267 0 436 9M80 18C207 7 333 7 401 13" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+                            </svg>
                         </span>
-                        <span className="text-[10px] md:text-xs font-semibold text-white/90 uppercase tracking-widest">Available for freelance</span>
-                    </motion.div>
-
-                    {/* Portfolio Text Section Integrated into Hero */}
-                    <div className="flex flex-col items-center gap-6 w-full text-center mt-8 md:mt-12 mb-2 md:mb-6">
-                        <motion.div
-                            initial={{ opacity: 0, x: -100 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: false, amount: 0.3 }}
-                            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}>
-                            <AnimatedLetterText text="PORTFOLIO" letterToReplace="O"
-                                className="text-6xl sm:text-7xl md:text-[6.5rem] lg:text-[8rem]" />
-                        </motion.div>
-                       
+                    </h1>
+                    <p className="mt-6 max-w-[360px] text-sm leading-7 text-white/75 sm:text-base">Full stack developer turning ideas into thoughtful, interactive websites. Built to feel as good as they look.</p>
+                    <div className="mt-8 flex flex-wrap items-center gap-5 sm:gap-7">
+                        <a href="#work" className="group inline-flex items-center gap-4 rounded-full bg-accent pl-6 pr-2 py-2 text-sm font-extrabold text-black shadow-[4px_4px_0_rgba(0,0,0,0.15)] transition-transform hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                            Explore my work <span className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-accent transition-transform group-hover:rotate-45"><ArrowUpRight aria-hidden="true" className="h-5 w-5" /></span>
+                        </a>
+                        <a href="#about" className="inline-flex items-center gap-2 border-b border-white/40 py-2 text-sm font-semibold hover:border-accent hover:text-accent">More about me <ArrowDown aria-hidden="true" className="h-4 w-4" /></a>
                     </div>
+                </motion.div>
 
-                    {/* Cinematic Horizontal Typography - IHZA DEV */}
-                    <div className="w-full flex flex-row items-center justify-center gap-2 md:gap-4 flex-wrap py-4 md:py-10">
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: false }}
-                            className="flex flex-row overflow-hidden pb-2"
-                        >
-                            {"IHZA".split("").map((char, index) => (
-                                <motion.span
-                                    key={index}
-                                    variants={{
-                                        hidden: { y: 150, rotate: 10 },
-                                        visible: { y: 0, rotate: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: index * 0.05 } }
-                                    }}
-                                    className="text-[clamp(3.5rem,10vw,110px)] font-black leading-[0.85] tracking-tighter m-0 p-0 uppercase inline-block"
-                                    style={{
-                                        fontFamily: '"Arial Black", Impact, sans-serif', color: "var(--clr-accent)",
-                                        textShadow: "4px 4px 0 var(--clr-primary-dark), 8px 8px 0 rgba(0,0,0,0.1)"
-                                    }}>
-                                    {char}
-                                </motion.span>
-                            ))}
-                        </motion.div>
-
-                        <motion.div
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: false }}
-                            className="flex flex-row overflow-hidden pb-2"
-                        >
-                            {"DEV".split("").map((char, index) => (
-                                <motion.span
-                                    key={index}
-                                    variants={{
-                                        hidden: { y: 150, rotate: -10 },
-                                        visible: { y: 0, rotate: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 + index * 0.05 } }
-                                    }}
-                                    className="text-[clamp(3.5rem,10vw,110px)] font-black leading-[0.85] tracking-tighter text-white m-0 p-0 uppercase inline-block"
-                                    style={{
-                                        fontFamily: '"Arial Black", Impact, sans-serif',
-                                        textShadow: "4px 4px 0 var(--clr-primary-dark), 8px 8px 0 rgba(0,0,0,0.1)"
-                                    }}>
-                                    {char}
-                                </motion.span>
-                            ))}
-                        </motion.div>
+                <div className="relative mt-4 h-[380px] min-w-0 sm:h-[470px] lg:mt-0 lg:h-[570px]" aria-label="Developer laptop illustration">
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                        <div className="absolute aspect-square w-[88%] rounded-full border border-white/15 bg-gradient-to-br from-white/[0.08] to-transparent" />
+                        <div className="absolute aspect-square w-[70%] rounded-full border border-dashed border-white/10" />
+                        <span className="absolute left-0 top-[16%] text-[clamp(4rem,9vw,8rem)] font-black tracking-tighter text-white/[0.06]">MAKE IT</span>
+                        <span className="absolute bottom-[13%] right-0 text-[clamp(4rem,9vw,8rem)] font-black tracking-tighter text-white/[0.06]">MATTER.</span>
+                        <Sparkles className="absolute right-[7%] top-[18%] h-7 w-7 text-accent" strokeWidth={1.3} />
+                        <span className="absolute bottom-[22%] left-[7%] h-2 w-2 rounded-full bg-accent" />
                     </div>
-
-                    {/* Mobile pill cards — md:hidden, in-flow */}
-                    <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                        className="md:hidden flex items-center justify-center gap-3 mt-10 w-full">
-                        <div className="flex items-center gap-3 px-4 py-3 rounded-2xl backdrop-blur-md border border-white/30 shadow-lg"
-                            style={{ background: "rgba(255,255,255,0.15)" }}>
-                            <div className="w-9 h-9 rounded-full border-2 border-white/50 overflow-hidden shrink-0" style={{ background: "#D2B48C" }}>
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ihza&backgroundColor=D2B48C" alt="Avatar" className="w-full h-full object-cover" />
-                            </div>
-                            <div>
-                                <p className="font-black text-xs text-white leading-none">ihza.dev</p>
-                                <p className="text-[10px] text-white/70 mt-0.5 font-semibold">42+ projects</p>
-                            </div>
-                        </div>
-                        <div className="w-1.5 h-1.5 rounded-full bg-white/30 shrink-0" />
-                        <div className="flex items-center gap-3 px-4 py-3 rounded-2xl backdrop-blur-md border border-white/30 shadow-lg"
-                            style={{ background: "rgba(255,255,255,0.15)" }}>
-                            <div className="w-9 h-9 rounded-full border-2 border-white/50 overflow-hidden shrink-0" style={{ background: "#2C3E50" }}>
-                                <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=Frontend" alt="Avatar" className="w-full h-full object-cover scale-150" />
-                            </div>
-                            <div>
-                                <p className="font-black text-xs text-white leading-none">React Dev</p>
-                                <p className="text-[10px] text-white/70 mt-0.5 font-semibold">3+ yrs exp</p>
-                            </div>
-                        </div>
-                    </motion.div>
-
+                    <div className="absolute inset-0 overflow-hidden">
+                        <LaptopIllustration />
+                    </div>
+                    <div className="pointer-events-none absolute bottom-0 left-0 right-0 flex flex-col items-center gap-2">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/80">Not just pixels. Personality.</span>
+                        <span className="text-[11px] text-white/50">Ihza / Full Stack Developer</span>
+                    </div>
                 </div>
-            </main>
-        </div>
+            </div>
+
+            <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 border-t border-white/15 px-6 pb-32 pt-6 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/65 sm:px-8 lg:px-12">
+                <span>Design-minded. Detail-driven.</span>
+                <span>React <span className="mx-2 text-accent">/</span> TypeScript <span className="mx-2 text-accent">/</span> Motion</span>
+            </div>
+        </section>
     );
 }
