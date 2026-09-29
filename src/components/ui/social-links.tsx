@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { FaLinkedinIn, FaGithub, FaXTwitter, FaInstagram } from 'react-icons/fa6';
 import { HiOutlineMail } from 'react-icons/hi';
@@ -13,12 +13,20 @@ const links = [
 
 export function SocialLinks() {
     const [isOpen, setIsOpen] = useState(false);
+    const [navbarVisible, setNavbarVisible] = useState(false);
+
+    useEffect(() => {
+        const updateNavbarPosition = () => setNavbarVisible(window.scrollY > 400);
+        updateNavbarPosition();
+        window.addEventListener('scroll', updateNavbarPosition, { passive: true });
+        return () => window.removeEventListener('scroll', updateNavbarPosition);
+    }, []);
 
     return (
         <>
             {/* Desktop Fixed Sidebar */}
             <div className="hidden md:flex fixed top-[35%] left-0 z-40 flex-col gap-2">
-                {links.map((link, i) => (
+                {links.map((link) => (
                     <motion.a
                         key={link.name}
                         href={link.href}
@@ -39,7 +47,7 @@ export function SocialLinks() {
             </div>
 
             {/* Mobile Floating Action Button */}
-            <div className="md:hidden fixed bottom-6 right-6 z-50">
+            <div className={`md:hidden fixed right-6 transition-[bottom] duration-300 ${navbarVisible ? 'bottom-[5.75rem] z-[110]' : 'bottom-6 z-50'}`}>
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
