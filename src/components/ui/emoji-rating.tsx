@@ -25,7 +25,7 @@ export function EmojiRating() {
 
     const handleRate = (id: number) => {
         setRating(id);
-        setBurst({ id, key: Date.now() });
+        setBurst((current) => ({ id, key: (current?.key ?? 0) + 1 }));
 
         if (notifyRef.current && RATING_TOASTS[id]) {
             const toast = RATING_TOASTS[id];
@@ -36,7 +36,7 @@ export function EmojiRating() {
     return (
         <>
             <div className="flex flex-col items-center gap-6">
-                <div className="flex justify-center bg-black/5 p-2 rounded-[2rem] gap-1 relative z-10 w-fit max-w-full mx-auto overflow-x-auto sm:overflow-visible no-scrollbar">
+                <div role="group" aria-label="Rate your experience" className="relative z-10 mx-auto flex w-fit max-w-full items-center justify-center gap-2 overflow-x-auto px-1 py-2 no-scrollbar sm:gap-3 sm:overflow-visible">
                     {emojis.map((item) => {
                         const isActive = rating === item.id;
                         return (
@@ -71,11 +71,14 @@ export function EmojiRating() {
 
                                 {/* Emoji button */}
                                 <motion.button
+                                    type="button"
                                     onClick={() => handleRate(item.id)}
                                     whileHover={{ scale: 1.15, y: -4 }}
                                     whileTap={{ scale: 0.8 }}
                                     animate={isActive ? { scale: 1.15, y: -4 } : { scale: 1, y: 0 }}
-                                    className={`relative z-10 w-14 h-14 sm:w-16 sm:h-16 text-3xl sm:text-4xl flex items-center justify-center rounded-full transition-colors ${isActive ? 'bg-background shadow-xl' : 'hover:bg-foreground/5'
+                                    aria-label={`Rate ${item.label}`}
+                                    aria-pressed={isActive}
+                                    className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-full border text-3xl transition-colors sm:h-16 sm:w-16 sm:text-4xl ${isActive ? 'border-primary bg-accent shadow-[0_5px_0_rgba(33,17,63,0.14)]' : 'border-foreground/10 bg-background hover:border-primary/40 hover:bg-primary/5'
                                         }`}
                                 >
                                     {item.emoji}

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { FaLinkedinIn, FaGithub, FaXTwitter, FaInstagram } from 'react-icons/fa6';
+import { FaLinkedinIn, FaGithub, FaInstagram } from 'react-icons/fa6';
 import { HiOutlineMail } from 'react-icons/hi';
 
 const links = [
-    { name: 'LinkedIn', icon: <FaLinkedinIn />, href: '#', type: 'primary' },
-    { name: 'GitHub', icon: <FaGithub />, href: '#', type: 'primary' },
-    { name: 'Twitter/X', icon: <FaXTwitter />, href: '#', type: 'primary' },
-    { name: 'Instagram', icon: <FaInstagram />, href: '#', type: 'accent' },
-    { name: 'Email', icon: <HiOutlineMail />, href: 'mailto:ihza@ihza.dev', type: 'accent' },
+    { name: 'GitHub', icon: <FaGithub />, href: 'https://github.com/fafago1m', type: 'primary' },
+    { name: 'LinkedIn', icon: <FaLinkedinIn />, href: 'https://www.linkedin.com/in/ihza-maulana-alfarisi-991a0b318/', type: 'primary' },
+    { name: 'Instagram', icon: <FaInstagram />, href: 'https://www.instagram.com/_actshop/', type: 'accent' },
+    { name: 'Email', icon: <HiOutlineMail />, href: 'mailto:alfacastel3@gmail.com', type: 'accent' },
 ];
 
 export function SocialLinks() {

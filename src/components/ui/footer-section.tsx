@@ -1,4 +1,5 @@
 import { ArrowUp, ArrowUpRight } from 'lucide-react';
+import { useReducedMotion } from 'motion/react';
 import { BrandLogo } from './brand-logo';
 
 const navigation = [
@@ -15,6 +16,8 @@ const socials = [
 ];
 
 export function Footer() {
+    const reduceMotion = useReducedMotion();
+
     return (
         <footer className="border-t border-foreground/10 bg-muted px-6 pb-28 pt-12 text-foreground sm:px-8 md:pb-8 md:pt-16">
             <div className="mx-auto max-w-6xl">
@@ -61,7 +64,14 @@ export function Footer() {
                         <p>© {new Date().getFullYear()} Ihza.dev</p>
                         <p>Designed & built by Ihza.</p>
                     </div>
-                    <a href="#home" className="group inline-flex shrink-0 items-center gap-3 rounded-full text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+                    <a
+                        href="#home"
+                        onClick={(event) => {
+                            event.preventDefault();
+                            window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+                        }}
+                        className="group inline-flex shrink-0 items-center gap-3 rounded-full text-xs font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                    >
                         <span className="text-foreground/70 group-hover:text-primary">Back to top</span>
                         <span className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-accent text-[#21113f] shadow-[2px_2px_0_rgba(0,0,0,0.12)] transition-transform motion-safe:group-hover:-translate-y-1">
                             <ArrowUp aria-hidden="true" className="h-4 w-4" />

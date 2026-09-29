@@ -22,6 +22,10 @@ const mediaItems: MediaItemType[] = [
         url: "/certificates/ukk.jpg",
     },
     {
+        id: 12, type: "image", title: "Momenku Siap Berkemas · Young Entrepreneur Award", desc: "Recognized by the Yogyakarta Special Region Department of Education, Youth and Sports for youth entrepreneurship through ACT STORE · 2025",
+        url: "/certificates/momenku-award.png",
+    },
+    {
         id: 11, type: "image", title: "AI & Machine Learning", desc: "Intelligent Systems design",
         url: "/certificates/c9.jpg",
     },
@@ -36,6 +40,10 @@ const mediaItems: MediaItemType[] = [
     {
         id: 5, type: "image", title: "Full Stack Next JS & Laravel 11", desc: "Developed a full-stack catering website using Next.js and Laravel 11, including frontend development, backend API integration, and database management",
         url: "/certificates/c3.jpg",
+    },
+    {
+        id: 13, type: "image", title: "Web Dev with Next.js, Prisma & TypeScript", desc: "Completed an 86-lesson e-commerce project course · BuildWithAngga · 29 Oct 2025",
+        url: "/certificates/buildwithangga-next-prisma.jpg",
     },
     {
         id: 6, type: "image", title: "UI/UX Figma", desc: "Created wireframes and mockups using Figma",

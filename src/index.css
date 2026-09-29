@@ -91,6 +91,16 @@ body {
   background-color: var(--clr-bg);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   background: var(--clr-bg);
   color: var(--clr-text);
