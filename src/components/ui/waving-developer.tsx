@@ -1,82 +1,152 @@
-import { useSyncExternalStore } from 'react';
+import { useId } from 'react';
+import { useReducedMotion } from 'motion/react';
 
-const motionPreference = '(prefers-reduced-motion: reduce)';
-const getReducedMotion = () => window.matchMedia(motionPreference).matches;
-const getServerReducedMotion = () => true;
+// Animate isolated parts of the supplied illustration without changing the source asset.
+const handOutline = 'M1018 467 C982 450 974 420 973 388 L956 333 Q953 308 973 305 Q994 300 1016 363 L1037 263 Q1045 236 1064 241 Q1082 245 1076 272 L1069 318 L1090 264 Q1100 239 1118 247 Q1135 253 1126 278 L1108 325 L1130 284 Q1143 265 1157 277 Q1172 286 1159 310 L1138 351 L1169 328 Q1185 317 1195 330 Q1205 343 1186 366 L1150 412 Q1131 454 1101 470 L1112 496 L1027 502 Z';
 
-// Separate the palm at the wrist so its scale and wave can change without moving the sleeve.
-const handPath = "M277 172l-7-25-13-23q-5-8 1-11 5-3 10 5l7 11-7-35q-2-8 4-9 6-1 8 7l6 25-1-39q0-8 6-8 6 0 6 8l1 36 5-30q1-8 7-7 6 1 5 9l-5 32 8-18q3-7 8-4 6 2 2 10l-12 32q-3 19-18 34";
-const waveTiming = {
-    dur: '2.4s',
-    repeatCount: 'indefinite',
-    calcMode: 'spline' as const,
-    keyTimes: '0;0.25;0.5;0.75;1',
-    keySplines: '0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1',
-};
+// Include the hair, ears and jaw; pivot at the neck so the face moves as one unit.
+const headOutline = 'M545 634 L540 597 Q503 578 486 544 Q444 560 420 517 Q402 482 418 455 L373 425 Q352 389 364 342 Q351 286 401 245 L413 201 L450 210 L451 177 Q492 191 538 167 Q630 121 681 169 L723 162 L711 191 Q751 187 758 225 Q817 246 800 310 L800 353 L786 390 L780 407 Q800 431 787 470 Q775 503 738 508 Q724 553 692 579 L700 634 Z';
 
-function subscribeToMotionPreference(onChange: () => void) {
-    const query = window.matchMedia(motionPreference);
-    query.addEventListener('change', onChange);
-    return () => query.removeEventListener('change', onChange);
-}
+const eyes = [
+    { name: 'left', x: 535, y: 462, rx: 17, ry: 23 },
+    { name: 'right', x: 659, y: 441, rx: 16, ry: 24 },
+];
+const mouthOutline = 'M556 526 Q605 518 656 504 Q665 503 663 518 Q656 564 611 568 Q574 570 556 535 Z';
 
 export function WavingDeveloper() {
-    const reduceMotion = useSyncExternalStore(subscribeToMotionPreference, getReducedMotion, getServerReducedMotion);
-    const animate = !reduceMotion;
+    const id = useId().replace(/:/g, '');
+    const reduceMotion = useReducedMotion();
+    const source = `${import.meta.env.BASE_URL}images/developer-loading.png`;
 
     return (
-        <svg role="img" aria-label="Ihza's illustrated developer character waving hello" viewBox="0 0 360 360" className="block h-full w-full overflow-visible" fill="none">
-            <circle cx="176" cy="195" r="132" fill="#C4B5FD" fillOpacity="0.2" />
-            <ellipse cx="181" cy="330" rx="105" ry="9" fill="#21113F" fillOpacity="0.15" />
-            <g data-wave-body="" stroke="#21113F" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                {animate && <animateTransform attributeName="transform" type="translate" values="0 0;0 -1.5;0 0" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" />}
-                <g data-wave-arm="">
-                    <path d="M239 197L261 217Q265 221 269 216L298 172L277 172C264 181 252 188 239 197Z" fill="#E8B58E" />
-                    <g transform="translate(288 172) scale(0.9) translate(-288 -172)">
-                        <g data-wave-hand="">
-                            {animate && <animateTransform attributeName="transform" type="rotate" values="0 288 172;6 288 172;-6 288 172;4 288 172;0 288 172" {...waveTiming} />}
-                            <path d={handPath} fill="#E8B58E" />
-                            <path d="M278 140q13-3 18 8" stroke="#B77F60" strokeWidth="2" />
+        <svg
+            role="img"
+            aria-label="Ihza waving hello"
+            viewBox="0 0 1271 1238"
+            className="block h-full w-full overflow-visible"
+        >
+            <defs>
+                <clipPath id={`${id}-head`}>
+                    <path d={headOutline} />
+                </clipPath>
+                {eyes.map(({ name, x, y, rx, ry }) => (
+                    <clipPath key={name} id={`${id}-${name}-eye`}>
+                        <ellipse cx={x} cy={y} rx={rx} ry={ry} />
+                    </clipPath>
+                ))}
+                <clipPath id={`${id}-mouth`}>
+                    <path d={mouthOutline} />
+                </clipPath>
+                <linearGradient id={`${id}-skin`} x1="0" y1="0" x2="0" y2="1">
+                    <stop stopColor="#fbbf90" />
+                    <stop offset="1" stopColor="#fabb8d" />
+                </linearGradient>
+                <clipPath id={`${id}-hand`}>
+                    <path d={handOutline} />
+                </clipPath>
+                <mask id={`${id}-body`} maskUnits="userSpaceOnUse" x="0" y="0" width="1271" height="1238">
+                    <rect width="1271" height="1238" fill="white" />
+                    <path d={handOutline} fill="black" />
+                    <path d={headOutline} fill="black" />
+                </mask>
+                <radialGradient id={`${id}-background`}>
+                    <stop stopColor="#e8e0fc" />
+                    <stop offset="1" stopColor="#dcd0fa" />
+                </radialGradient>
+            </defs>
+            {reduceMotion ? (
+                <image href={source} width="1271" height="1238" />
+            ) : (
+                <>
+                    {/* Restore the circular backdrop behind the moving hand. */}
+                    <g clipPath={`url(#${id}-hand)`}>
+                        <ellipse cx="625" cy="585" rx="506" ry="491" fill={`url(#${id}-background)`} />
+                    </g>
+                    <path d={headOutline} fill={`url(#${id}-background)`} />
+                    <image href={source} width="1271" height="1238" mask={`url(#${id}-body)`} />
+                    {/* Overlap the neck under the head to keep the joint connected. */}
+                    <path d="M553 606 Q618 632 687 601 L695 642 Q622 676 550 646 Z" fill={`url(#${id}-skin)`} />
+                    <g data-wave-head="">
+                        <animateTransform
+                            attributeName="transform"
+                            type="rotate"
+                            values="0 620 630;-1.6 620 630;1.1 620 630;0 620 630"
+                            keyTimes="0;0.3;0.65;1"
+                            keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+                            calcMode="spline"
+                            dur="3.4s"
+                            repeatCount="indefinite"
+                        />
+                        <g>
+                            <animateTransform
+                                attributeName="transform"
+                                type="translate"
+                                values="0 0;0 3;0 -2;0 0"
+                                keyTimes="0;0.3;0.65;1"
+                                keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+                                calcMode="spline"
+                                dur="3.4s"
+                                repeatCount="indefinite"
+                            />
+                            <image href={source} width="1271" height="1238" clipPath={`url(#${id}-head)`} />
+                            {/* Skin underlays prevent the original pupils/smile showing through. */}
+                            {eyes.map(({ name, x, y, rx, ry }) => (
+                                <g key={name}>
+                                    <ellipse cx={x} cy={y} rx={rx} ry={ry} fill={`url(#${id}-skin)`} />
+                                    <g transform={`translate(${x} ${y})`}>
+                                        <g>
+                                            {/* A quick close, short hold, and softer reopening. */}
+                                            <animateTransform
+                                                attributeName="transform"
+                                                type="scale"
+                                                values="1 1;1 1;1 0.08;1 0.08;1 1;1 1"
+                                                keyTimes="0;0.26;0.29;0.31;0.36;1"
+                                                dur="3.4s"
+                                                repeatCount="indefinite"
+                                            />
+                                            <g transform={`translate(${-x} ${-y})`}>
+                                                <image href={source} width="1271" height="1238" clipPath={`url(#${id}-${name}-eye)`} />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            ))}
+                            <path d={mouthOutline} fill={`url(#${id}-skin)`} />
+                            <g transform="translate(610 526) rotate(-11)">
+                                <g>
+                                    <animateTransform
+                                        attributeName="transform"
+                                        type="scale"
+                                        values="1 1;1.025 0.84;1 1;1 1"
+                                        keyTimes="0;0.35;0.7;1"
+                                        keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+                                        calcMode="spline"
+                                        dur="2.6s"
+                                        repeatCount="indefinite"
+                                    />
+                                    <g transform="rotate(11) translate(-610 -526)">
+                                        <image href={source} width="1271" height="1238" clipPath={`url(#${id}-mouth)`} />
+                                    </g>
+                                </g>
+                            </g>
                         </g>
                     </g>
-                </g>
-
-                {/* Torso and raised sleeve have one outline, with no seam across the shoulder. */}
-                <path d="M151 214H201Q215 215 227 204L239 197L261 217L239 245Q228 252 230 275L235 324H109L104 284L78 268L94 237Q108 214 151 214Z" fill="#A78BFA" />
-                <path d="M239 197L261 217L251 230L229 208Z" fill="#CCFF00" />
-                <path d="m102 252 13 35M228 254l-6-13m-5-20 8-3" stroke="#5B21B6" strokeWidth="2.5" />
-                <path d="m85 263 25 15-5 16-27-16 7-15Z" fill="#CCFF00" />
-                <path d="M81 282q-4 23 17 29l38 8 6-20-31-12" fill="#E8B58E" />
-                <path d="m134 300 24-5q11-2 18 4l8 7q4 5-1 8l-10-5q9 9 2 13l-38-4-3-18Z" fill="#E8B58E" />
-                <path d="m157 309 15 6" stroke="#B77F60" strokeWidth="2" />
-
-                <path d="M157 192v28q17 19 34 0v-28" fill="#E8B58E" />
-                <path d="M158 195q17 13 32 0v13q-16 10-32-1v-12Z" fill="#CC9675" stroke="none" />
-                <path d="M145 217q10 29 29 29 20 0 29-29l-12-1q-16 19-34 0l-12 1Z" fill="#7C3AED" />
-                <path d="m155 266-11 13 11 13m38-26 11 13-11 13m-14-30-9 33" stroke="#CCFF00" strokeWidth="4" />
-
-                <g>
-                    {animate && <animateTransform attributeName="transform" type="rotate" values="0 175 207;-1.2 175 207;0 175 207" dur="3s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" />}
-                    <ellipse cx="123" cy="153" rx="10" ry="14" fill="#E8B58E" />
-                    <ellipse cx="226" cy="153" rx="10" ry="14" fill="#E8B58E" />
-                    <path d="M125 111q0-45 50-45t50 45l-4 51q-2 17-15 29l-18 13q-13 7-26 0l-18-13q-13-12-15-29l-4-51Z" fill="#E8B58E" />
-                    <path d="M128 145q-13-9-12-31l1-22q1-21 20-30l-4-11q16 4 30-2 24-10 42 3 29 4 29 34l-8 54-7 5-3-35q-11-8-16-20-20 24-63 21l-3 32-6 2Z" fill="#21113F" />
-                    <path d="M133 96q35 0 55-24m20 3q12 8 14 22" stroke="#554366" strokeWidth="3" />
-                    <path d="m141 136 10-3 10 2m28 0 10-2 10 3" strokeWidth="3.5" />
-                    {[151, 199].map((x) => (
-                        <ellipse key={x} cx={x} cy="150" rx="3" ry="4" fill="#21113F" stroke="none">
-                            {animate && <animate attributeName="ry" values="4;4;0.5;4;4" keyTimes="0;0.52;0.56;0.6;1" dur="3.2s" repeatCount="indefinite" />}
-                        </ellipse>
-                    ))}
-                    <path d="m174 152-3 12h6" stroke="#B77F60" strokeWidth="2" />
-                    <path d="M160 177q15 5 30-1-3 13-16 12-9 0-14-11Z" fill="#F8F5EF" strokeWidth="2" />
-                    <path d="M168 196q7 2 14-1" stroke="#B77F60" strokeWidth="2" />
-                </g>
-            </g>
-            <g stroke="#CCFF00" strokeWidth="3" strokeLinecap="round">
-                {animate && <animate attributeName="opacity" values="0.3;1;0.3" dur="2.4s" repeatCount="indefinite" />}
-                <path d="m308 55 8-12m4 26 14-3M74 119l-11-7" />
-            </g>
+                    <ellipse cx="1067" cy="490" rx="39" ry="22" fill="#f8b780" />
+                    <g>
+                        <animateTransform
+                            attributeName="transform"
+                            type="rotate"
+                            values="0 1067 492;8 1067 492;-7 1067 492;8 1067 492;0 1067 492"
+                            keyTimes="0;0.22;0.48;0.74;1"
+                            keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+                            calcMode="spline"
+                            dur="1.8s"
+                            repeatCount="indefinite"
+                        />
+                        <image href={source} width="1271" height="1238" clipPath={`url(#${id}-hand)`} />
+                    </g>
+                </>
+            )}
         </svg>
     );
 }
